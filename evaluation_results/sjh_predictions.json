@@ -1,0 +1,4322 @@
+[
+  {
+    "file": "case_001.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_002.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 credits[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_003.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_004.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "finalizeOperation()는 외부 전송 전에 positions[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 12
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_005.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 inline msg.sender == steward check 로 소유자 전용이며, totalSupply 를 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_006.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()는 소유자(custodian)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_007.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "settlePosition()의 delegatecall 대상(i6)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_008.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "processRequest()의 외부 호출(latest)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_009.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 직접 송금으로 늘어나는 계약 ETH 잔고를 분모로 지분을 내림 발행하고 0 지분을 거부하지 않습니다. 기존 지분자가 기부로 비율을 높이면 후속 입금이 0 지분으로 처리되고 기존 지분의 환매 가치에 흡수될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_010.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "handle()의 delegatecall 대상(logic)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_011.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "applyUpdate()의 외부 호출(release)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_012.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "processRequest()는 inline msg.sender == governor check 로 소유자 전용이며, totalSupply 를 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_013.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_014.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_015.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "processRequest()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_016.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_017.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 accounts[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_018.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 x3.transferFrom의 성공 여부를 버린 뒤 요청량 amount를 사용자 장부에 적립합니다. 토큰이 false를 반환하면 입금 없는 잔고가 생깁니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_019.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "routeValue()의 외부 호출(previewDeposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_020.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "finalizeOperation()의 외부 호출(consume)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_021.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "perform()의 외부 호출(transferFrom)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "withdraw()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      },
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_022.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "finalizeOperation()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_023.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "reconcile()의 외부 호출(valid)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_024.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "processRequest()의 delegatecall 대상(target)은 외부 권한 정책의 검사를 거칩니다. 정책 구현 없이 임의 대상 허용 여부를 확정할 수 없습니다.",
+      "processRequest()의 외부 호출(approved)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "line": 9
+      },
+      {
+        "function": "processRequest",
+        "line": 11
+      },
+      {
+        "function": "processRequest",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_025.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "finalizeOperation()는 소유자 전용 함수(inline msg.sender == governor check)로, 승인(allowance) 절차 없이 임의 계정(account)의 accounts 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_026.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_027.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "executeAction()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_028.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 accounts[msg.sender] 잔고를 차감(effects)하기 전에 외부 주소로 값을 전송(interaction)합니다. 재진입 공격으로 잔고 차감 이전에 인출 함수를 반복 호출해 자산을 초과 인출할 수 있습니다 (checks-effects-interactions 위반)."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_029.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "submit()는 payable 반복 delegatecall에서 같은 msg.value를 재사용합니다. 같은 계약의 예치 함수는 그 값을 잔고에 더하므로 한 번의 송금이 여러 번 입금으로 기록될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_030.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()는 approved의 토큰별 승인으로 소유권을 변경하지만 해당 승인을 지우지 않습니다. 이전 승인자가 새 소유자의 토큰을 다시 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_031.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "complete()의 발행량(outstanding)은 외부 정책 반환값으로 제한됩니다. 그 구현 없이 상한의 실효성을 확정할 수 없습니다.",
+      "complete()의 외부 호출(maximum)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 14
+      },
+      {
+        "function": "complete",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_032.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "processRequest()는 외부 전송 전에 balances[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 12
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_033.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_034.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()는 블록 속성과 입력값으로 계산한 해시를 수령자 선택에 사용하고 실제 자금을 송금합니다. 결과를 예측하거나 편향시켜 상금을 가져갈 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_035.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "finalizeOperation()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "finalizeOperation()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      },
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_036.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "reconcile()의 외부 호출(liabilities)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "reconcile()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      },
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_037.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_038.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 지급 권한을 msg.sender 대신 tx.origin으로 검사한 뒤 receiver에 송금합니다. 소유자가 중간 계약을 호출하면 그 계약이 송금 경로를 이용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_039.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "processRequest()의 외부 호출(random)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_040.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "finalizeOperation()는 소유자(governor)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_041.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_042.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_043.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(balances)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. balances 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_044.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 일부 부채를 차감한 뒤 borrower의 담보 collateral를 전부 0으로 만들고 호출자에게 지급합니다. 상환액과 담보 지급량의 비례 제한이 없어 소액 상환으로 전체 담보를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_045.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_046.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_047.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()는 소유자 전용 함수(inline msg.sender == custodian check)로, 승인(allowance) 절차 없이 임의 계정(account)의 positions 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_048.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 unit.transferFrom의 성공 여부를 버린 뒤 요청량 amount를 사용자 장부에 적립합니다. 토큰이 false를 반환하면 입금 없는 잔고가 생깁니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_049.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "finalizeOperation()의 외부 호출(seize)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_050.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "commitState()의 외부 호출(transferFrom)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "withdraw()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      },
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_051.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "reconcile()의 delegatecall 대상(engine)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_052.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 allocation[msg.sender]에서 읽은 배정량을 지급하면서 배정량 차감이나 사용 기록 갱신을 하지 않아 같은 배정을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_053.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_054.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_055.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 블록 속성과 입력값으로 계산한 해시를 수령자 선택에 사용하고 실제 자금을 송금합니다. 결과를 예측하거나 편향시켜 상금을 가져갈 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_056.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "dispatch()의 외부 호출(pull)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_057.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(accounts)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. accounts 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_058.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "fallback()는 누구나가 지정하는 임의 대상(engine)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "fallback",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_059.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "updateRecord()의 외부 호출(terms)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_060.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "applyUpdate()의 외부 호출(latest)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_061.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "complete()의 delegatecall 대상(i6)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_062.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_063.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_064.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_065.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 일부 부채를 차감한 뒤 borrower의 담보 collateral를 전부 0으로 만들고 호출자에게 지급합니다. 상환액과 담보 지급량의 비례 제한이 없어 소액 상환으로 전체 담보를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_066.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "executeAction()의 외부 호출(consume)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_067.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 소유자(inline msg.sender == custodian check)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_068.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 positions[msg.sender] 잔고를 차감(effects)하기 전에 외부 주소로 값을 전송(interaction)합니다. 재진입 공격으로 잔고 차감 이전에 인출 함수를 반복 호출해 자산을 초과 인출할 수 있습니다 (checks-effects-interactions 위반)."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_069.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "perform()는 allocation[msg.sender]에서 읽은 배정량을 지급하면서 배정량 차감이나 사용 기록 갱신을 하지 않아 같은 배정을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_070.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_071.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_072.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "updateRecord()의 외부 호출(seizure)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_073.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_074.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(balances)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. balances 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_075.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "perform()의 담보 대비 지급 상한은 referenceValue에 의존하지만 setReference()에서 호출 제한 없이 그 값을 바꿀 수 있습니다. 값을 부풀려 과도한 자금을 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_076.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "processRequest()는 token.transferFrom의 성공 여부를 버린 뒤 요청량 amount를 사용자 장부에 적립합니다. 토큰이 false를 반환하면 입금 없는 잔고가 생깁니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_077.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()는 전송액 중 일부를 소유자(custodian) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 configure()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_078.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 approved의 토큰별 승인으로 소유권을 변경하지만 해당 승인을 지우지 않습니다. 이전 승인자가 새 소유자의 토큰을 다시 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_079.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_080.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_081.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 호출 권한이나 사용자 잔고 검사 없이 인자로 받은 대상(target)과 금액(value)으로 계약 자금을 송금합니다. 누구나 보관 자금을 자신의 주소로 이동시킬 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_082.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_083.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "updateRecord()의 외부 호출(canUpgrade)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "fallback()의 delegatecall 대상(implementation)은 외부 권한 정책의 검사를 거칩니다. 정책 구현 없이 임의 대상 허용 여부를 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 10
+      },
+      {
+        "function": "fallback",
+        "line": 14
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_084.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "handle()의 외부 호출(canSend)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_085.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "processRequest()는 잔고 충분성 검사 없이 unchecked에서 accounts[msg.sender]를 차감하고 수령자에게 적립합니다. 언더플로로 잔고가 커져 가치 이전에 악용될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_086.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "fallback()는 누구나가 지정하는 임의 대상(module)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "fallback",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_087.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "commitState()의 외부 호출(canSend)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_088.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "perform()의 외부 호출(allowed)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "perform()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "line": 10
+      },
+      {
+        "function": "perform",
+        "line": 11
+      },
+      {
+        "function": "perform",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_089.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_090.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "submit()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_091.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "synchronize()의 delegatecall 대상(target)은 외부 권한 정책의 검사를 거칩니다. 정책 구현 없이 임의 대상 허용 여부를 확정할 수 없습니다.",
+      "synchronize()의 외부 호출(approved)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "line": 9
+      },
+      {
+        "function": "synchronize",
+        "line": 11
+      },
+      {
+        "function": "synchronize",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_092.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "updateRecord()의 외부 호출(authorized)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_093.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_094.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "routeValue()는 발행 전 공급량 상한을 코드로 강제합니다 (receiver != address(0) && issued + amount <= ceiling). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_095.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "perform()는 블록 속성과 입력값으로 계산한 해시를 수령자 선택에 사용하고 실제 자금을 송금합니다. 결과를 예측하거나 편향시켜 상금을 가져갈 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_096.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_097.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "synchronize()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_098.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "processRequest()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(accounts)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. accounts 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_099.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(positions)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. positions 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_100.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()는 allocation[msg.sender]에서 읽은 배정량을 지급하면서 배정량 차감이나 사용 기록 갱신을 하지 않아 같은 배정을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_101.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(positions)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. positions 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_102.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "settlePosition()의 외부 호출(canUpgrade)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "fallback()의 delegatecall 대상(module)은 외부 권한 정책의 검사를 거칩니다. 정책 구현 없이 임의 대상 허용 여부를 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 10
+      },
+      {
+        "function": "fallback",
+        "line": 14
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_103.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "routeValue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_104.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "dispatch()의 발행량(totalSupply)은 외부 정책 반환값으로 제한됩니다. 그 구현 없이 상한의 실효성을 확정할 수 없습니다.",
+      "dispatch()의 외부 호출(maximum)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 14
+      },
+      {
+        "function": "dispatch",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_105.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "perform()의 delegatecall 대상(implementation)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_106.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "processRequest()의 외부 호출(consume)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_107.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_108.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "routeValue()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "routeValue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 9
+      },
+      {
+        "function": "routeValue",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_109.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_110.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "updateRecord()의 delegatecall 대상(module)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_111.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(credits)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. credits 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_112.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 지급 권한을 msg.sender 대신 tx.origin으로 검사한 뒤 receiver에 송금합니다. 소유자가 중간 계약을 호출하면 그 계약이 송금 경로를 이용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_113.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "perform()는 발행 전 공급량 상한을 코드로 강제합니다 (receiver != address(0) && aggregate + amount <= hardCap). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_114.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 잔고 충분성 검사 없이 unchecked에서 balances[msg.sender]를 차감하고 수령자에게 적립합니다. 언더플로로 잔고가 커져 가치 이전에 악용될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_115.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_116.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "finalizeOperation()는 approved의 토큰별 승인으로 소유권을 변경하지만 해당 승인을 지우지 않습니다. 이전 승인자가 새 소유자의 토큰을 다시 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_117.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 잔고 충분성 검사 없이 unchecked에서 b2[msg.sender]를 차감하고 수령자에게 적립합니다. 언더플로로 잔고가 커져 가치 이전에 악용될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_118.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 b2[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_119.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 소유자 전용 함수(inline msg.sender == owner check)로, 승인(allowance) 절차 없이 임의 계정(account)의 balances 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_120.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_121.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()는 소유자(inline msg.sender == owner check)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_122.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_123.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "finalizeOperation()의 외부 호출(userLiability)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "finalizeOperation()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      },
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_124.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_125.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_126.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 payable 반복 delegatecall에서 같은 msg.value를 재사용합니다. 같은 계약의 예치 함수는 그 값을 잔고에 더하므로 한 번의 송금이 여러 번 입금으로 기록될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_127.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()는 소유자(inline msg.sender == steward check)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_128.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()의 담보 대비 지급 상한은 price에 의존하지만 setReference()에서 호출 제한 없이 그 값을 바꿀 수 있습니다. 값을 부풀려 과도한 자금을 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_129.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "perform()는 소유자(inline msg.sender == governor check)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_130.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "executeAction()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "executeAction()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 9
+      },
+      {
+        "function": "executeAction",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_131.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "synchronize()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_132.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 장부에서 units 단위를 차감하지만 지급액을 (units + 99) / 100로 매번 올림합니다. 지급을 작은 청구로 나누면 같은 차감량에 더 많은 준비금을 지급받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_133.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 장부에서 units 단위를 차감하지만 지급액을 (units + 99) / 100로 매번 올림합니다. 지급을 작은 청구로 나누면 같은 차감량에 더 많은 준비금을 지급받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_134.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "fallback()는 누구나가 지정하는 임의 대상(i6)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "fallback",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_135.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 호출 권한이나 사용자 잔고 검사 없이 인자로 받은 대상(target)과 금액(value)으로 계약 자금을 송금합니다. 누구나 보관 자금을 자신의 주소로 이동시킬 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_136.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "processRequest()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_137.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()는 소유자(a7)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_138.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "reconcile()의 외부 호출(pull)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_139.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()의 담보 대비 지급 상한은 q4에 의존하지만 setReference()에서 호출 제한 없이 그 값을 바꿀 수 있습니다. 값을 부풀려 과도한 자금을 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_140.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_141.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 payable 반복 delegatecall에서 같은 msg.value를 재사용합니다. 같은 계약의 예치 함수는 그 값을 잔고에 더하므로 한 번의 송금이 여러 번 입금으로 기록될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_142.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "submit()의 외부 호출(canUpgrade)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "fallback()의 delegatecall 대상(logic)은 외부 권한 정책의 검사를 거칩니다. 정책 구현 없이 임의 대상 허용 여부를 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 10
+      },
+      {
+        "function": "fallback",
+        "line": 14
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_143.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "processRequest()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "processRequest()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 9
+      },
+      {
+        "function": "processRequest",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_144.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_145.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "perform()의 외부 호출(output)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_146.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 asset.transferFrom의 성공 여부를 버린 뒤 요청량 amount를 사용자 장부에 적립합니다. 토큰이 false를 반환하면 입금 없는 잔고가 생깁니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_147.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 지급 권한을 msg.sender 대신 tx.origin으로 검사한 뒤 receiver에 송금합니다. 소유자가 중간 계약을 호출하면 그 계약이 송금 경로를 이용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_148.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_149.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 buyer가 납입한 금액(amount)을 수령자 seller 본인의 권한 검사만으로 지급합니다. 구매자 확인이나 이행 승인 조건 없이 예치금을 해제할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_150.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "redeem()는 외부 전송 전에 s8[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_151.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_152.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "updateRecord()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_153.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()는 소유자 전용 함수(inline msg.sender == a7 check)로, 승인(allowance) 절차 없이 임의 계정(account)의 b2 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_154.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_155.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_156.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 credits[msg.sender] 잔고를 차감(effects)하기 전에 외부 주소로 값을 전송(interaction)합니다. 재진입 공격으로 잔고 차감 이전에 인출 함수를 반복 호출해 자산을 초과 인출할 수 있습니다 (checks-effects-interactions 위반)."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_157.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "dispatch()의 delegatecall 대상(module)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_158.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "applyUpdate()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_159.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_160.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_161.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "executeAction()의 외부 호출(userLiability)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "executeAction()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 9
+      },
+      {
+        "function": "executeAction",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_162.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_163.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "submit()는 호출 권한이나 사용자 잔고 검사 없이 인자로 받은 대상(target)과 금액(value)으로 계약 자금을 송금합니다. 누구나 보관 자금을 자신의 주소로 이동시킬 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_164.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 전송액 중 일부를 소유자(steward) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 configure()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_165.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "dispatch()의 외부 호출(consume)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_166.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_167.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_168.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()는 buyer가 납입한 금액(amount)을 수령자 seller 본인의 권한 검사만으로 지급합니다. 구매자 확인이나 이행 승인 조건 없이 예치금을 해제할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_169.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 블록 속성과 입력값으로 계산한 해시를 수령자 선택에 사용하고 실제 자금을 송금합니다. 결과를 예측하거나 편향시켜 상금을 가져갈 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_170.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "redeem()는 외부 전송 전에 shares[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_171.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "redeem()는 외부 전송 전에 units[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_172.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 reserveAsset.transferFrom의 성공 여부를 버린 뒤 요청량 amount를 사용자 장부에 적립합니다. 토큰이 false를 반환하면 입금 없는 잔고가 생깁니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_173.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 buyer가 납입한 금액(amount)을 수령자 seller 본인의 권한 검사만으로 지급합니다. 구매자 확인이나 이행 승인 조건 없이 예치금을 해제할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_174.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "redeem()는 외부 전송 전에 participation[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_175.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "finalizeOperation()는 전송액 중 일부를 소유자(governor) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 configure()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_176.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "applyUpdate()의 외부 호출(random)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_177.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_178.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_179.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(b2)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. b2 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_180.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_181.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "commitState()의 외부 호출(authorizeBatch)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_182.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 approved의 토큰별 승인으로 소유권을 변경하지만 해당 승인을 지우지 않습니다. 이전 승인자가 새 소유자의 토큰을 다시 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_183.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "perform()의 외부 호출(canSend)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_184.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "submit()의 외부 호출(authorized)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_185.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 소유자(inline msg.sender == a7 check)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_186.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "routeValue()는 외부 전송 전에 b2[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 12
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_187.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 일부 부채를 차감한 뒤 borrower의 담보 collateral를 전부 0으로 만들고 호출자에게 지급합니다. 상환액과 담보 지급량의 비례 제한이 없어 소액 상환으로 전체 담보를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_188.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_189.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()는 buyer가 납입한 금액(amount)을 수령자 seller 본인의 권한 검사만으로 지급합니다. 구매자 확인이나 이행 승인 조건 없이 예치금을 해제할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_190.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "commitState()의 외부 호출(allowed)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "commitState()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "line": 10
+      },
+      {
+        "function": "commitState",
+        "line": 11
+      },
+      {
+        "function": "commitState",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_191.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "complete()의 외부 호출(pull)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_192.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 지급 권한을 msg.sender 대신 tx.origin으로 검사한 뒤 receiver에 송금합니다. 소유자가 중간 계약을 호출하면 그 계약이 송금 경로를 이용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_193.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 inline msg.sender == owner check 로 소유자 전용이며, totalSupply 를 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_194.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "complete()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_195.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "submit()의 외부 호출(allowed)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_196.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_197.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_198.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 소유자 전용 함수(inline msg.sender == steward check)로, 승인(allowance) 절차 없이 임의 계정(account)의 credits 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_199.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "applyUpdate()의 외부 호출(consume)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_200.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_201.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_202.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "complete()의 delegatecall 대상(logic)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_203.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 payable 반복 delegatecall에서 같은 msg.value를 재사용합니다. 같은 계약의 예치 함수는 그 값을 잔고에 더하므로 한 번의 송금이 여러 번 입금으로 기록될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_204.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 장부에서 units 단위를 차감하지만 지급액을 (units + 99) / 100로 매번 올림합니다. 지급을 작은 청구로 나누면 같은 차감량에 더 많은 준비금을 지급받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_205.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_206.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_207.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 balances[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_208.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "dispatch()의 외부 호출(valid)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_209.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 장부에서 units 단위를 차감하지만 지급액을 (units + 99) / 100로 매번 올림합니다. 지급을 작은 청구로 나누면 같은 차감량에 더 많은 준비금을 지급받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_210.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "submit()는 지급 권한을 msg.sender 대신 tx.origin으로 검사한 뒤 receiver에 송금합니다. 소유자가 중간 계약을 호출하면 그 계약이 송금 경로를 이용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_211.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_212.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "updateRecord()의 외부 호출(allowed)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_213.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "reconcile()의 외부 호출(consume)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_214.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 직접 송금으로 늘어나는 계약 ETH 잔고를 분모로 지분을 내림 발행하고 0 지분을 거부하지 않습니다. 기존 지분자가 기부로 비율을 높이면 후속 입금이 0 지분으로 처리되고 기존 지분의 환매 가치에 흡수될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_215.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_216.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "processRequest()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 10
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_217.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "settlePosition()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_218.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "settlePosition()의 외부 호출(seizure)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_219.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 b2[msg.sender] 잔고를 차감(effects)하기 전에 외부 주소로 값을 전송(interaction)합니다. 재진입 공격으로 잔고 차감 이전에 인출 함수를 반복 호출해 자산을 초과 인출할 수 있습니다 (checks-effects-interactions 위반)."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_220.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "submit()의 delegatecall 대상(engine)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_221.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_222.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "synchronize()의 외부 호출(latest)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_223.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "complete()의 외부 호출(consume)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_224.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "handle()의 외부 호출(transferFrom)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "withdraw()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      },
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_225.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "settlePosition()의 외부 호출(allowed)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_226.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "synchronize()는 외부 전송 전에 credits[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 12
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_227.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "synchronize()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "synchronize()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 9
+      },
+      {
+        "function": "synchronize",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_228.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "fallback()는 누구나가 지정하는 임의 대상(logic)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "fallback",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_229.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 inline msg.sender == custodian check 로 소유자 전용이며, totalSupply 를 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_230.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_231.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_232.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 소유자(steward)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_233.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_234.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 직접 송금으로 늘어나는 계약 ETH 잔고를 분모로 지분을 내림 발행하고 0 지분을 거부하지 않습니다. 기존 지분자가 기부로 비율을 높이면 후속 입금이 0 지분으로 처리되고 기존 지분의 환매 가치에 흡수될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_235.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "routeValue()의 외부 호출(settle)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 12
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_236.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "executeAction()의 외부 호출(settle)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 12
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_237.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "fallback()는 누구나가 지정하는 임의 대상(implementation)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "fallback",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_238.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "reconcile()의 delegatecall 대상(implementation)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_239.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "finalizeOperation()의 외부 호출(settle)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 12
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_240.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()의 담보 대비 지급 상한은 quote에 의존하지만 setReference()에서 호출 제한 없이 그 값을 바꿀 수 있습니다. 값을 부풀려 과도한 자금을 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_241.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()는 approved의 토큰별 승인으로 소유권을 변경하지만 해당 승인을 지우지 않습니다. 이전 승인자가 새 소유자의 토큰을 다시 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_242.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_243.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_244.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 allocation[msg.sender]에서 읽은 배정량을 지급하면서 배정량 차감이나 사용 기록 갱신을 하지 않아 같은 배정을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_245.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "commitState()는 발행 전 공급량 상한을 코드로 강제합니다 (receiver != address(0) && outstanding + amount <= maximum). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_246.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "executeAction()의 외부 호출(previewDeposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_247.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settlePosition()는 호출 권한이나 사용자 잔고 검사 없이 인자로 받은 대상(target)과 금액(value)으로 계약 자금을 송금합니다. 누구나 보관 자금을 자신의 주소로 이동시킬 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_248.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(b2)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. b2 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_249.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_250.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 payable 반복 delegatecall에서 같은 msg.value를 재사용합니다. 같은 계약의 예치 함수는 그 값을 잔고에 더하므로 한 번의 송금이 여러 번 입금으로 기록될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_251.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 positions[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_252.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "submit()는 장부에서 units 단위를 차감하지만 지급액을 (units + 99) / 100로 매번 올림합니다. 지급을 작은 청구로 나누면 같은 차감량에 더 많은 준비금을 지급받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_253.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_254.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "finalizeOperation()의 외부 호출(transferFrom)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "withdraw()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      },
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_255.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "commitState()의 외부 호출(output)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_256.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "handle()는 발행 전 공급량 상한을 코드로 강제합니다 (receiver != address(0) && t9 + amount <= m4). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_257.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "processRequest()의 외부 호출(release)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_258.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "dispatch()의 외부 호출(liabilities)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "dispatch()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 9
+      },
+      {
+        "function": "dispatch",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_259.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "executeAction()의 외부 호출(seize)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_260.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "routeValue()는 allocation[msg.sender]에서 읽은 배정량을 지급하면서 배정량 차감이나 사용 기록 갱신을 하지 않아 같은 배정을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_261.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_262.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_263.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "executeAction()는 외부 전송 전에 accounts[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 12
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_264.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_265.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_266.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()는 전송액 중 일부를 소유자(a7) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 configure()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_267.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "submit()의 외부 호출(terms)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_268.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 서명 검사 후 amount를 지급하지만 서명 메시지와 연결된 nonce/사용 기록을 갱신하지 않습니다. 같은 서명을 반복 제출해 재지급을 받을 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_269.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(credits)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. credits 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_270.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 configure()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_271.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_272.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 balances[msg.sender] 잔고를 차감(effects)하기 전에 외부 주소로 값을 전송(interaction)합니다. 재진입 공격으로 잔고 차감 이전에 인출 함수를 반복 호출해 자산을 초과 인출할 수 있습니다 (checks-effects-interactions 위반)."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_273.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "handle()의 외부 호출(output)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_274.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeAction()는 inline msg.sender == a7 check 로 소유자 전용이며, totalSupply 를 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 11
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "case_275.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "settlePosition()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_276.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "perform()의 외부 호출(authorizeBatch)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_277.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "redeem()는 외부 전송 전에 receipts[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_278.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "dispatch()는 일부 부채를 차감한 뒤 borrower의 담보 collateral를 전부 0으로 만들고 호출자에게 지급합니다. 상환액과 담보 지급량의 비례 제한이 없어 소액 상환으로 전체 담보를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_279.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "routeValue()의 외부 호출(transferFrom)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "withdraw()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      },
+      {
+        "function": "withdraw",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_280.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "synchronize()는 잔고 충분성 검사 없이 unchecked에서 positions[msg.sender]를 차감하고 수령자에게 적립합니다. 언더플로로 잔고가 커져 가치 이전에 악용될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_281.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "finalizeOperation()의 외부 호출(previewDeposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_282.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 호출 권한이나 사용자 잔고 검사 없이 인자로 받은 대상(target)과 금액(value)으로 계약 자금을 송금합니다. 누구나 보관 자금을 자신의 주소로 이동시킬 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_283.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "complete()는 일부 부채를 차감한 뒤 borrower의 담보 collateral를 전부 0으로 만들고 호출자에게 지급합니다. 상환액과 담보 지급량의 비례 제한이 없어 소액 상환으로 전체 담보를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_284.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateRecord()는 직접 송금으로 늘어나는 계약 ETH 잔고를 분모로 지분을 내림 발행하고 0 지분을 거부하지 않습니다. 기존 지분자가 기부로 비율을 높이면 후속 입금이 0 지분으로 처리되고 기존 지분의 환매 가치에 흡수될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_285.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "reconcile()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_286.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_287.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "finalizeOperation()는 발행 전 공급량 상한을 코드로 강제합니다 (receiver != address(0) && totalSupply + amount <= supplyLimit). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 13
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_288.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "commitState()는 블록 속성과 입력값으로 계산한 해시를 수령자 선택에 사용하고 실제 자금을 송금합니다. 결과를 예측하거나 편향시켜 상금을 가져갈 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_289.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "reconcile()의 발행량(issued)은 외부 정책 반환값으로 제한됩니다. 그 구현 없이 상한의 실효성을 확정할 수 없습니다.",
+      "reconcile()의 외부 호출(maximum)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 14
+      },
+      {
+        "function": "reconcile",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_290.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "submit()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "case_291.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_292.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_293.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()는 직접 송금으로 늘어나는 계약 ETH 잔고를 분모로 지분을 내림 발행하고 0 지분을 거부하지 않습니다. 기존 지분자가 기부로 비율을 높이면 후속 입금이 0 지분으로 처리되고 기존 지분의 환매 가치에 흡수될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 9
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_294.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "perform()는 buyer가 납입한 금액(amount)을 수령자 seller 본인의 권한 검사만으로 지급합니다. 구매자 확인이나 이행 승인 조건 없이 예치금을 해제할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_295.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_296.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "applyUpdate()의 delegatecall 대상(target)은 외부 권한 정책의 검사를 거칩니다. 정책 구현 없이 임의 대상 허용 여부를 확정할 수 없습니다.",
+      "applyUpdate()의 외부 호출(approved)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "line": 9
+      },
+      {
+        "function": "applyUpdate",
+        "line": 11
+      },
+      {
+        "function": "applyUpdate",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_297.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "handle()의 담보 대비 지급 상한은 mark에 의존하지만 setReference()에서 호출 제한 없이 그 값을 바꿀 수 있습니다. 값을 부풀려 과도한 자금을 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_298.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "applyUpdate()는 잔고 충분성 검사 없이 unchecked에서 credits[msg.sender]를 차감하고 수령자에게 적립합니다. 언더플로로 잔고가 커져 가치 이전에 악용될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "VULNERABILITY"
+  },
+  {
+    "file": "case_299.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "case_300.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "submit()의 외부 호출(seizure)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  }
+]

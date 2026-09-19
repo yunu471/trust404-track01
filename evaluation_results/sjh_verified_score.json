@@ -1,0 +1,384 @@
+{
+  "dataset": "sjh",
+  "label_source": "SJH_dataset/trust404_solidity_300/answers/answers.json",
+  "analyzer_sha256": "f871e055ba3f13a403316b565d0771369a1acae7d25fdcafc9fbf2e1710940d8",
+  "exit_code": 0,
+  "elapsed_seconds": 6.197,
+  "total": 300,
+  "correct": 215,
+  "wrong": 0,
+  "uncertain": 85,
+  "net_score": 215,
+  "linear_normalized_10_assumption": 7.166666666666667,
+  "linear_converted_15_assumption": 10.75,
+  "coverage": 0.7166666666666667,
+  "decided_accuracy": 1.0,
+  "confusion_matrix": {
+    "BENIGN": {
+      "BENIGN": 95,
+      "UNCERTAIN": 25
+    },
+    "MALICIOUS": {
+      "MALICIOUS": 120
+    },
+    "UNCERTAIN": {
+      "UNCERTAIN": 60
+    }
+  },
+  "mismatches": [],
+  "abstentions": [
+    {
+      "file": "case_007.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_008.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_010.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_011.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_015.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_019.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_020.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_021.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_022.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_023.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_024.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_027.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_031.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_035.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_036.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_039.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_049.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_050.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_051.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_056.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_059.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_060.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_061.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_066.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_072.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_083.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_084.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_087.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_088.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_091.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_092.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_097.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_102.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_103.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_104.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_105.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_106.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_108.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_110.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_123.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_130.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_138.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_142.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_143.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_145.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_157.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_161.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_165.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_176.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_181.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_183.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_184.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_190.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_191.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_195.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_199.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_202.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_208.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_212.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_213.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_218.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_220.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_222.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_223.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_224.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_225.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_227.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_235.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_236.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_238.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_239.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_246.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_254.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_255.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_257.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_258.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_259.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_267.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_273.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_276.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_279.sol",
+      "expected": "BENIGN"
+    },
+    {
+      "file": "case_281.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_289.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_296.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "case_300.sol",
+      "expected": "UNCERTAIN"
+    }
+  ],
+  "validation": {
+    "method": "standard-library schema core checks, not full Draft 2020-12",
+    "errors": [],
+    "missing": [],
+    "duplicates": [],
+    "extras": [],
+    "line_errors": [],
+    "empty_reasons": 0,
+    "empty_evidence": 0,
+    "detector_failures": 0
+  },
+  "reason_validity_score": null,
+  "reason_validity_note": "Requires manual code/reason review; evidence presence does not imply 2 points."
+}

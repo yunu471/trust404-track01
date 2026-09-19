@@ -1,0 +1,301 @@
+file,verdict,category,variant,function,line,reason
+case_001.sol,BENIGN,signature_replay,5,handle,9,"서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+case_002.sol,BENIGN,rescue_and_escrow,2,routeValue,8,구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다.
+case_003.sol,BENIGN,multicall_value_reuse,4,finalizeOperation,7,delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다.
+case_004.sol,BENIGN,rounding_extraction,4,finalizeOperation,8,지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다.
+case_005.sol,MALICIOUS,supply_control,2,applyUpdate,9,특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다.
+case_006.sol,MALICIOUS,asymmetric_transfer_gate,4,routeValue,10,관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다.
+case_007.sol,BENIGN,delegate_execution,5,settlePosition,9,delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다.
+case_008.sol,UNCERTAIN,oracle_lending,2,processRequest,12,담보 가격과 갱신 시점이 외부 오라클 구현에 의존하므로 조작 저항성과 최신성을 판단할 수 없습니다.
+case_009.sol,MALICIOUS,vault_share_inflation,3,reconcile,7,첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다.
+case_010.sol,BENIGN,initialization_and_upgrade,2,handle,9,관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다.
+case_011.sol,UNCERTAIN,escrow_release,1,applyUpdate,9,대금 해제 조건이 외부 중재자의 판정에 전적으로 의존하므로 해당 구현과 신뢰 가정이 필요합니다.
+case_012.sol,MALICIOUS,supply_control,3,processRequest,9,특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다.
+case_013.sol,BENIGN,oracle_lending,4,submit,10,대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다.
+case_014.sol,BENIGN,privileged_confiscation,5,complete,8,소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다.
+case_015.sol,BENIGN,authorization_identity,1,processRequest,8,민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다.
+case_016.sol,BENIGN,repeatable_claim,3,updateRecord,8,청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다.
+case_017.sol,BENIGN,rescue_and_escrow,3,commitState,8,구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다.
+case_018.sol,MALICIOUS,token_return_accounting,5,executeAction,8,토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다.
+case_019.sol,UNCERTAIN,vault_share_inflation,3,routeValue,10,지분 환산을 외부 회계 모듈이 계산하므로 기부와 반올림 처리 방식을 확인할 수 없습니다.
+case_020.sol,UNCERTAIN,cross_domain_replay,2,finalizeOperation,8,메시지 고유성과 도메인 검증이 외부 메신저의 consume 구현에 의존합니다.
+case_021.sol,BENIGN,token_return_accounting,4,perform,8,토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다.
+case_022.sol,BENIGN,authorization_identity,4,finalizeOperation,8,민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다.
+case_023.sol,UNCERTAIN,unchecked_arithmetic,2,reconcile,8,unchecked 연산의 사전조건을 외부 한도 모듈이 보증하도록 되어 있어 그 구현 없이는 안전성을 확정할 수 없습니다.
+case_024.sol,UNCERTAIN,delegate_execution,2,processRequest,8,delegatecall 대상의 선택과 승인 여부를 외부 관리자 모듈이 결정하므로 제공된 코드만으로 안전성을 확정할 수 없습니다.
+case_025.sol,MALICIOUS,privileged_confiscation,3,finalizeOperation,8,특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다.
+case_026.sol,BENIGN,privileged_confiscation,3,dispatch,8,소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다.
+case_027.sol,BENIGN,authorization_identity,3,executeAction,8,민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다.
+case_028.sol,MALICIOUS,reentrancy_withdrawal,3,reconcile,7,외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다.
+case_029.sol,MALICIOUS,multicall_value_reuse,3,submit,7,payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다.
+case_030.sol,MALICIOUS,nft_stale_approval,4,routeValue,8,NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다.
+case_031.sol,UNCERTAIN,supply_control,3,complete,11,발행 가능량을 외부 정책 컨트랙트가 결정하므로 그 구현 없이는 상한의 실효성을 확정할 수 없습니다.
+case_032.sol,BENIGN,rounding_extraction,1,processRequest,8,지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다.
+case_033.sol,BENIGN,privileged_confiscation,2,handle,8,소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다.
+case_034.sol,MALICIOUS,predictable_randomness,1,routeValue,7,상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다.
+case_035.sol,BENIGN,arbitrary_wallet_execution,4,finalizeOperation,8,임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다.
+case_036.sol,UNCERTAIN,rescue_and_escrow,2,reconcile,9,회수 가능 초과액을 외부 회계 모듈이 계산하므로 사용자 부채 포함 여부를 확인할 수 없습니다.
+case_037.sol,BENIGN,asymmetric_transfer_gate,2,handle,10,전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다.
+case_038.sol,MALICIOUS,authorization_identity,1,complete,8,민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다.
+case_039.sol,UNCERTAIN,predictable_randomness,2,processRequest,9,당첨 난수의 안전성이 외부 비콘 구현과 완료 보장에 의존하므로 제공된 코드만으로 판단할 수 없습니다.
+case_040.sol,MALICIOUS,asymmetric_transfer_gate,3,finalizeOperation,10,관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다.
+case_041.sol,BENIGN,liquidation_math,5,synchronize,7,압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다.
+case_042.sol,BENIGN,unchecked_arithmetic,4,perform,7,전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다.
+case_043.sol,MALICIOUS,forced_ether_boundary,1,handle,8,사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다.
+case_044.sol,MALICIOUS,liquidation_math,5,updateRecord,7,청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다.
+case_045.sol,BENIGN,reentrancy_withdrawal,5,synchronize,8,외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다.
+case_046.sol,BENIGN,unchecked_arithmetic,5,handle,7,전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다.
+case_047.sol,MALICIOUS,privileged_confiscation,4,routeValue,8,특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다.
+case_048.sol,MALICIOUS,token_return_accounting,2,applyUpdate,8,토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다.
+case_049.sol,UNCERTAIN,liquidation_math,2,finalizeOperation,9,압류량 계산이 외부 위험 엔진에 위임되어 있어 비례성·상한·가격 단위를 확인할 수 없습니다.
+case_050.sol,BENIGN,token_return_accounting,3,commitState,8,토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다.
+case_051.sol,BENIGN,initialization_and_upgrade,4,reconcile,9,관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다.
+case_052.sol,MALICIOUS,repeatable_claim,4,handle,8,청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다.
+case_053.sol,BENIGN,reentrancy_withdrawal,3,applyUpdate,8,외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다.
+case_054.sol,BENIGN,fee_configuration,3,dispatch,8,수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다.
+case_055.sol,MALICIOUS,predictable_randomness,4,handle,7,상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다.
+case_056.sol,UNCERTAIN,token_return_accounting,1,dispatch,8,저수준 토큰 호출의 반환 형식과 성공 의미가 외부 토큰 구현에 달려 있어 제공된 코드만으로 회계 안전성을 확정할 수 없습니다.
+case_057.sol,MALICIOUS,forced_ether_boundary,3,reconcile,8,사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다.
+case_058.sol,MALICIOUS,initialization_and_upgrade,4,routeValue,7,초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다.
+case_059.sol,UNCERTAIN,fee_configuration,1,updateRecord,8,수수료율과 수령처가 외부 정책에서 반환되어 코드만으로 최대치와 관리자 이익 여부를 알 수 없습니다.
+case_060.sol,UNCERTAIN,oracle_lending,1,applyUpdate,12,담보 가격과 갱신 시점이 외부 오라클 구현에 의존하므로 조작 저항성과 최신성을 판단할 수 없습니다.
+case_061.sol,BENIGN,initialization_and_upgrade,5,complete,9,관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다.
+case_062.sol,BENIGN,unchecked_arithmetic,3,commitState,7,전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다.
+case_063.sol,BENIGN,repeatable_claim,4,submit,8,청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다.
+case_064.sol,BENIGN,signature_replay,2,routeValue,9,"서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+case_065.sol,MALICIOUS,liquidation_math,1,handle,7,청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다.
+case_066.sol,UNCERTAIN,cross_domain_replay,1,executeAction,8,메시지 고유성과 도메인 검증이 외부 메신저의 consume 구현에 의존합니다.
+case_067.sol,MALICIOUS,delegate_execution,4,handle,9,특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다.
+case_068.sol,MALICIOUS,reentrancy_withdrawal,4,complete,7,외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다.
+case_069.sol,MALICIOUS,repeatable_claim,3,perform,8,청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다.
+case_070.sol,BENIGN,escrow_release,1,reconcile,9,대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다.
+case_071.sol,BENIGN,nft_stale_approval,3,dispatch,8,소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다.
+case_072.sol,UNCERTAIN,privileged_confiscation,1,updateRecord,8,제3자 잔액 조정 허용 여부가 외부 준법 정책에 의존해 그 권한 범위를 확인할 수 없습니다.
+case_073.sol,BENIGN,repeatable_claim,5,settlePosition,8,청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다.
+case_074.sol,MALICIOUS,rescue_and_escrow,1,settlePosition,8,사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다.
+case_075.sol,MALICIOUS,oracle_lending,3,perform,10,누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다.
+case_076.sol,MALICIOUS,token_return_accounting,3,processRequest,8,토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다.
+case_077.sol,MALICIOUS,fee_configuration,4,routeValue,8,특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다.
+case_078.sol,MALICIOUS,nft_stale_approval,2,executeAction,8,NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다.
+case_079.sol,MALICIOUS,cross_domain_replay,5,updateRecord,7,브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다.
+case_080.sol,BENIGN,repeatable_claim,2,complete,8,청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다.
+case_081.sol,MALICIOUS,arbitrary_wallet_execution,5,applyUpdate,6,누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다.
+case_082.sol,MALICIOUS,signature_replay,5,executeAction,8,서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다.
+case_083.sol,UNCERTAIN,initialization_and_upgrade,1,updateRecord,9,업그레이드 허용 여부가 외부 권한 관리자에 의해 결정되므로 그 구성과 구현을 확인해야 합니다.
+case_084.sol,UNCERTAIN,authorization_identity,3,handle,9,최종 권한 판정이 외부 권한 모듈에 위임되어 있어 호출자·원발신자 처리 규칙을 알 수 없습니다.
+case_085.sol,MALICIOUS,unchecked_arithmetic,3,processRequest,7,unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다.
+case_086.sol,MALICIOUS,initialization_and_upgrade,3,finalizeOperation,7,초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다.
+case_087.sol,UNCERTAIN,authorization_identity,1,commitState,9,최종 권한 판정이 외부 권한 모듈에 위임되어 있어 호출자·원발신자 처리 규칙을 알 수 없습니다.
+case_088.sol,UNCERTAIN,arbitrary_wallet_execution,2,perform,9,임의 호출 권한이 외부 권한 레지스트리 반환값에 의존하므로 실제 승인 범위를 확인할 수 없습니다.
+case_089.sol,MALICIOUS,cross_domain_replay,3,reconcile,7,브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다.
+case_090.sol,BENIGN,forced_ether_boundary,1,submit,7,사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다.
+case_091.sol,UNCERTAIN,delegate_execution,3,synchronize,8,delegatecall 대상의 선택과 승인 여부를 외부 관리자 모듈이 결정하므로 제공된 코드만으로 안전성을 확정할 수 없습니다.
+case_092.sol,UNCERTAIN,nft_stale_approval,1,updateRecord,8,승인 유효성과 정리를 외부 승인 레지스트리가 담당하므로 소유권 변경 시 무효화되는지 알 수 없습니다.
+case_093.sol,MALICIOUS,cross_domain_replay,4,complete,7,브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다.
+case_094.sol,BENIGN,supply_control,2,routeValue,10,발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다.
+case_095.sol,MALICIOUS,predictable_randomness,3,perform,7,상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다.
+case_096.sol,MALICIOUS,signature_replay,1,settlePosition,8,서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다.
+case_097.sol,BENIGN,authorization_identity,2,synchronize,8,민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다.
+case_098.sol,MALICIOUS,rescue_and_escrow,3,processRequest,8,사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다.
+case_099.sol,MALICIOUS,rescue_and_escrow,4,synchronize,8,사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다.
+case_100.sol,MALICIOUS,repeatable_claim,2,commitState,8,청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다.
+case_101.sol,MALICIOUS,forced_ether_boundary,4,complete,8,사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다.
+case_102.sol,UNCERTAIN,initialization_and_upgrade,3,settlePosition,9,업그레이드 허용 여부가 외부 권한 관리자에 의해 결정되므로 그 구성과 구현을 확인해야 합니다.
+case_103.sol,BENIGN,authorization_identity,5,routeValue,8,민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다.
+case_104.sol,UNCERTAIN,supply_control,1,dispatch,11,발행 가능량을 외부 정책 컨트랙트가 결정하므로 그 구현 없이는 상한의 실효성을 확정할 수 없습니다.
+case_105.sol,BENIGN,initialization_and_upgrade,1,perform,9,관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다.
+case_106.sol,UNCERTAIN,repeatable_claim,2,processRequest,8,중복 청구 방지가 외부 배포 관리자에 위임되어 있어 consume 함수의 일회성 보장을 확인해야 합니다.
+case_107.sol,BENIGN,asymmetric_transfer_gate,4,reconcile,10,전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다.
+case_108.sol,BENIGN,arbitrary_wallet_execution,5,routeValue,8,임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다.
+case_109.sol,BENIGN,escrow_release,4,submit,9,대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다.
+case_110.sol,BENIGN,delegate_execution,3,updateRecord,9,delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다.
+case_111.sol,MALICIOUS,forced_ether_boundary,2,dispatch,8,사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다.
+case_112.sol,MALICIOUS,authorization_identity,2,updateRecord,8,민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다.
+case_113.sol,BENIGN,supply_control,4,perform,10,발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다.
+case_114.sol,MALICIOUS,unchecked_arithmetic,1,settlePosition,7,unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다.
+case_115.sol,BENIGN,nft_stale_approval,1,perform,8,소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다.
+case_116.sol,MALICIOUS,nft_stale_approval,3,finalizeOperation,8,NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다.
+case_117.sol,MALICIOUS,unchecked_arithmetic,5,executeAction,7,unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다.
+case_118.sol,BENIGN,rescue_and_escrow,5,handle,8,구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다.
+case_119.sol,MALICIOUS,privileged_confiscation,1,synchronize,8,특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다.
+case_120.sol,BENIGN,cross_domain_replay,1,submit,7,메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다.
+case_121.sol,MALICIOUS,delegate_execution,1,routeValue,9,특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다.
+case_122.sol,BENIGN,multicall_value_reuse,5,routeValue,7,delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다.
+case_123.sol,UNCERTAIN,forced_ether_boundary,2,finalizeOperation,9,수신 ETH의 사용자 귀속 여부를 외부 레지스트리가 판정하므로 이 코드만으로 관리자 회수액에 사용자 자산이 포함되는지 알 수 없습니다.
+case_124.sol,BENIGN,liquidation_math,4,processRequest,7,압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다.
+case_125.sol,MALICIOUS,asymmetric_transfer_gate,1,synchronize,10,관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다.
+case_126.sol,MALICIOUS,multicall_value_reuse,4,settlePosition,7,payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다.
+case_127.sol,MALICIOUS,delegate_execution,2,commitState,9,특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다.
+case_128.sol,MALICIOUS,oracle_lending,1,routeValue,10,누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다.
+case_129.sol,MALICIOUS,delegate_execution,3,perform,9,특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다.
+case_130.sol,BENIGN,arbitrary_wallet_execution,3,executeAction,8,임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다.
+case_131.sol,BENIGN,forced_ether_boundary,5,synchronize,7,사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다.
+case_132.sol,MALICIOUS,rounding_extraction,2,updateRecord,8,매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다.
+case_133.sol,MALICIOUS,rounding_extraction,1,complete,8,매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다.
+case_134.sol,MALICIOUS,initialization_and_upgrade,5,commitState,7,초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다.
+case_135.sol,MALICIOUS,arbitrary_wallet_execution,1,complete,6,누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다.
+case_136.sol,BENIGN,forced_ether_boundary,4,processRequest,7,사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다.
+case_137.sol,MALICIOUS,asymmetric_transfer_gate,5,commitState,10,관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다.
+case_138.sol,UNCERTAIN,token_return_accounting,2,reconcile,8,저수준 토큰 호출의 반환 형식과 성공 의미가 외부 토큰 구현에 달려 있어 제공된 코드만으로 회계 안전성을 확정할 수 없습니다.
+case_139.sol,MALICIOUS,oracle_lending,5,dispatch,10,누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다.
+case_140.sol,BENIGN,nft_stale_approval,5,complete,8,소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다.
+case_141.sol,MALICIOUS,multicall_value_reuse,1,complete,7,payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다.
+case_142.sol,UNCERTAIN,initialization_and_upgrade,2,submit,9,업그레이드 허용 여부가 외부 권한 관리자에 의해 결정되므로 그 구성과 구현을 확인해야 합니다.
+case_143.sol,BENIGN,arbitrary_wallet_execution,1,processRequest,8,임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다.
+case_144.sol,MALICIOUS,cross_domain_replay,2,dispatch,7,브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다.
+case_145.sol,UNCERTAIN,rounding_extraction,2,perform,10,반올림 방향과 환율이 외부 환산 모듈에 위임되어 있어 반복 추출 가능성을 판단할 수 없습니다.
+case_146.sol,MALICIOUS,token_return_accounting,1,settlePosition,8,토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다.
+case_147.sol,MALICIOUS,authorization_identity,5,applyUpdate,8,민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다.
+case_148.sol,BENIGN,repeatable_claim,1,reconcile,8,청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다.
+case_149.sol,MALICIOUS,escrow_release,5,dispatch,8,판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다.
+case_150.sol,BENIGN,vault_share_inflation,5,synchronize,7,가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다.
+case_151.sol,BENIGN,multicall_value_reuse,3,executeAction,7,delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다.
+case_152.sol,BENIGN,predictable_randomness,3,updateRecord,8,가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다.
+case_153.sol,MALICIOUS,privileged_confiscation,5,commitState,8,특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다.
+case_154.sol,BENIGN,cross_domain_replay,4,processRequest,7,메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다.
+case_155.sol,BENIGN,unchecked_arithmetic,1,finalizeOperation,7,전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다.
+case_156.sol,MALICIOUS,reentrancy_withdrawal,2,dispatch,7,외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다.
+case_157.sol,BENIGN,initialization_and_upgrade,3,dispatch,9,관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다.
+case_158.sol,BENIGN,forced_ether_boundary,3,applyUpdate,7,사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다.
+case_159.sol,BENIGN,fee_configuration,1,perform,8,수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다.
+case_160.sol,BENIGN,multicall_value_reuse,1,processRequest,7,delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다.
+case_161.sol,UNCERTAIN,forced_ether_boundary,1,executeAction,9,수신 ETH의 사용자 귀속 여부를 외부 레지스트리가 판정하므로 이 코드만으로 관리자 회수액에 사용자 자산이 포함되는지 알 수 없습니다.
+case_162.sol,BENIGN,reentrancy_withdrawal,4,processRequest,8,외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다.
+case_163.sol,MALICIOUS,arbitrary_wallet_execution,3,submit,6,누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다.
+case_164.sol,MALICIOUS,fee_configuration,2,executeAction,8,특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다.
+case_165.sol,UNCERTAIN,signature_replay,1,dispatch,9,재사용 방지와 도메인 검증이 외부 서명 검증기에 위임되어 있어 해당 구현 없이는 판정할 수 없습니다.
+case_166.sol,BENIGN,oracle_lending,2,complete,10,대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다.
+case_167.sol,BENIGN,cross_domain_replay,2,settlePosition,7,메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다.
+case_168.sol,MALICIOUS,escrow_release,2,commitState,8,판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다.
+case_169.sol,MALICIOUS,predictable_randomness,5,dispatch,7,상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다.
+case_170.sol,BENIGN,vault_share_inflation,1,submit,7,가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다.
+case_171.sol,BENIGN,vault_share_inflation,2,settlePosition,7,가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다.
+case_172.sol,MALICIOUS,token_return_accounting,4,synchronize,8,토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다.
+case_173.sol,MALICIOUS,escrow_release,4,handle,8,판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다.
+case_174.sol,BENIGN,vault_share_inflation,4,processRequest,7,가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다.
+case_175.sol,MALICIOUS,fee_configuration,3,finalizeOperation,8,특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다.
+case_176.sol,UNCERTAIN,predictable_randomness,1,applyUpdate,9,당첨 난수의 안전성이 외부 비콘 구현과 완료 보장에 의존하므로 제공된 코드만으로 판단할 수 없습니다.
+case_177.sol,BENIGN,liquidation_math,1,submit,7,압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다.
+case_178.sol,BENIGN,escrow_release,2,complete,9,대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다.
+case_179.sol,MALICIOUS,rescue_and_escrow,5,executeAction,8,사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다.
+case_180.sol,BENIGN,escrow_release,3,updateRecord,9,대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다.
+case_181.sol,UNCERTAIN,multicall_value_reuse,1,commitState,9,배치별 msg.value 소비량을 외부 회계 모듈이 승인하므로 해당 모듈의 중복 방지 규칙을 확인해야 합니다.
+case_182.sol,MALICIOUS,nft_stale_approval,1,synchronize,8,NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다.
+case_183.sol,UNCERTAIN,authorization_identity,2,perform,9,최종 권한 판정이 외부 권한 모듈에 위임되어 있어 호출자·원발신자 처리 규칙을 알 수 없습니다.
+case_184.sol,UNCERTAIN,nft_stale_approval,2,submit,8,승인 유효성과 정리를 외부 승인 레지스트리가 담당하므로 소유권 변경 시 무효화되는지 알 수 없습니다.
+case_185.sol,MALICIOUS,delegate_execution,5,dispatch,9,특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다.
+case_186.sol,BENIGN,rounding_extraction,5,routeValue,8,지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다.
+case_187.sol,MALICIOUS,liquidation_math,3,reconcile,7,청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다.
+case_188.sol,BENIGN,oracle_lending,1,reconcile,10,대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다.
+case_189.sol,MALICIOUS,escrow_release,1,routeValue,8,판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다.
+case_190.sol,UNCERTAIN,arbitrary_wallet_execution,1,commitState,9,임의 호출 권한이 외부 권한 레지스트리 반환값에 의존하므로 실제 승인 범위를 확인할 수 없습니다.
+case_191.sol,UNCERTAIN,token_return_accounting,3,complete,8,저수준 토큰 호출의 반환 형식과 성공 의미가 외부 토큰 구현에 달려 있어 제공된 코드만으로 회계 안전성을 확정할 수 없습니다.
+case_192.sol,MALICIOUS,authorization_identity,4,settlePosition,8,민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다.
+case_193.sol,MALICIOUS,supply_control,1,settlePosition,9,특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다.
+case_194.sol,BENIGN,predictable_randomness,2,complete,8,가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다.
+case_195.sol,UNCERTAIN,asymmetric_transfer_gate,2,submit,9,전송 허용 여부가 외부 정책의 반환값에 의존하며 해당 정책 구현이 제공되지 않았습니다.
+case_196.sol,BENIGN,privileged_confiscation,4,reconcile,8,소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다.
+case_197.sol,BENIGN,reentrancy_withdrawal,2,settlePosition,8,외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다.
+case_198.sol,MALICIOUS,privileged_confiscation,2,executeAction,8,특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다.
+case_199.sol,UNCERTAIN,repeatable_claim,1,applyUpdate,8,중복 청구 방지가 외부 배포 관리자에 위임되어 있어 consume 함수의 일회성 보장을 확인해야 합니다.
+case_200.sol,MALICIOUS,signature_replay,2,applyUpdate,8,서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다.
+case_201.sol,BENIGN,oracle_lending,3,updateRecord,10,대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다.
+case_202.sol,BENIGN,delegate_execution,2,complete,9,delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다.
+case_203.sol,MALICIOUS,multicall_value_reuse,5,applyUpdate,7,payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다.
+case_204.sol,MALICIOUS,rounding_extraction,4,settlePosition,8,매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다.
+case_205.sol,BENIGN,liquidation_math,2,settlePosition,7,압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다.
+case_206.sol,BENIGN,signature_replay,4,perform,9,"서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+case_207.sol,BENIGN,rescue_and_escrow,1,finalizeOperation,8,구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다.
+case_208.sol,UNCERTAIN,unchecked_arithmetic,1,dispatch,8,unchecked 연산의 사전조건을 외부 한도 모듈이 보증하도록 되어 있어 그 구현 없이는 안전성을 확정할 수 없습니다.
+case_209.sol,MALICIOUS,rounding_extraction,5,applyUpdate,8,매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다.
+case_210.sol,MALICIOUS,authorization_identity,3,submit,8,민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다.
+case_211.sol,MALICIOUS,signature_replay,4,synchronize,8,서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다.
+case_212.sol,UNCERTAIN,asymmetric_transfer_gate,1,updateRecord,9,전송 허용 여부가 외부 정책의 반환값에 의존하며 해당 정책 구현이 제공되지 않았습니다.
+case_213.sol,UNCERTAIN,signature_replay,2,reconcile,9,재사용 방지와 도메인 검증이 외부 서명 검증기에 위임되어 있어 해당 구현 없이는 판정할 수 없습니다.
+case_214.sol,MALICIOUS,vault_share_inflation,2,dispatch,7,첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다.
+case_215.sol,BENIGN,reentrancy_withdrawal,1,submit,8,외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다.
+case_216.sol,MALICIOUS,signature_replay,3,processRequest,8,서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다.
+case_217.sol,BENIGN,predictable_randomness,5,settlePosition,8,가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다.
+case_218.sol,UNCERTAIN,privileged_confiscation,3,settlePosition,8,제3자 잔액 조정 허용 여부가 외부 준법 정책에 의존해 그 권한 범위를 확인할 수 없습니다.
+case_219.sol,MALICIOUS,reentrancy_withdrawal,5,updateRecord,7,외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다.
+case_220.sol,BENIGN,delegate_execution,4,submit,9,delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다.
+case_221.sol,BENIGN,cross_domain_replay,3,applyUpdate,7,메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다.
+case_222.sol,UNCERTAIN,oracle_lending,3,synchronize,12,담보 가격과 갱신 시점이 외부 오라클 구현에 의존하므로 조작 저항성과 최신성을 판단할 수 없습니다.
+case_223.sol,UNCERTAIN,signature_replay,3,complete,9,재사용 방지와 도메인 검증이 외부 서명 검증기에 위임되어 있어 해당 구현 없이는 판정할 수 없습니다.
+case_224.sol,BENIGN,token_return_accounting,5,handle,8,토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다.
+case_225.sol,UNCERTAIN,asymmetric_transfer_gate,3,settlePosition,9,전송 허용 여부가 외부 정책의 반환값에 의존하며 해당 정책 구현이 제공되지 않았습니다.
+case_226.sol,BENIGN,rounding_extraction,2,synchronize,8,지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다.
+case_227.sol,BENIGN,arbitrary_wallet_execution,2,synchronize,8,임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다.
+case_228.sol,MALICIOUS,initialization_and_upgrade,2,executeAction,7,초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다.
+case_229.sol,MALICIOUS,supply_control,4,synchronize,9,특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다.
+case_230.sol,BENIGN,signature_replay,1,finalizeOperation,9,"서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+case_231.sol,BENIGN,cross_domain_replay,5,synchronize,7,메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다.
+case_232.sol,MALICIOUS,asymmetric_transfer_gate,2,executeAction,10,관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다.
+case_233.sol,BENIGN,nft_stale_approval,2,handle,8,소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다.
+case_234.sol,MALICIOUS,vault_share_inflation,4,complete,7,첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다.
+case_235.sol,UNCERTAIN,reentrancy_withdrawal,3,routeValue,10,출금 상태 확정과 실제 송금을 외부 결제 라우터가 담당하므로 그 콜백·회계 구현 없이는 재진입 가능성을 확정할 수 없습니다.
+case_236.sol,UNCERTAIN,reentrancy_withdrawal,1,executeAction,10,출금 상태 확정과 실제 송금을 외부 결제 라우터가 담당하므로 그 콜백·회계 구현 없이는 재진입 가능성을 확정할 수 없습니다.
+case_237.sol,MALICIOUS,initialization_and_upgrade,1,synchronize,7,초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다.
+case_238.sol,BENIGN,delegate_execution,1,reconcile,9,delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다.
+case_239.sol,UNCERTAIN,reentrancy_withdrawal,2,finalizeOperation,10,출금 상태 확정과 실제 송금을 외부 결제 라우터가 담당하므로 그 콜백·회계 구현 없이는 재진입 가능성을 확정할 수 없습니다.
+case_240.sol,MALICIOUS,oracle_lending,2,commitState,10,누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다.
+case_241.sol,MALICIOUS,nft_stale_approval,5,commitState,8,NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다.
+case_242.sol,BENIGN,asymmetric_transfer_gate,5,complete,10,전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다.
+case_243.sol,BENIGN,liquidation_math,3,applyUpdate,7,압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다.
+case_244.sol,MALICIOUS,repeatable_claim,5,dispatch,8,청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다.
+case_245.sol,BENIGN,supply_control,3,commitState,10,발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다.
+case_246.sol,UNCERTAIN,vault_share_inflation,1,executeAction,10,지분 환산을 외부 회계 모듈이 계산하므로 기부와 반올림 처리 방식을 확인할 수 없습니다.
+case_247.sol,MALICIOUS,arbitrary_wallet_execution,4,settlePosition,6,누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다.
+case_248.sol,MALICIOUS,forced_ether_boundary,5,updateRecord,8,사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다.
+case_249.sol,BENIGN,signature_replay,3,commitState,9,"서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+case_250.sol,MALICIOUS,multicall_value_reuse,2,updateRecord,7,payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다.
+case_251.sol,BENIGN,rescue_and_escrow,4,perform,8,구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다.
+case_252.sol,MALICIOUS,rounding_extraction,3,submit,8,매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다.
+case_253.sol,BENIGN,multicall_value_reuse,2,synchronize,7,delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다.
+case_254.sol,BENIGN,token_return_accounting,1,finalizeOperation,8,토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다.
+case_255.sol,UNCERTAIN,rounding_extraction,1,commitState,10,반올림 방향과 환율이 외부 환산 모듈에 위임되어 있어 반복 추출 가능성을 판단할 수 없습니다.
+case_256.sol,BENIGN,supply_control,5,handle,10,발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다.
+case_257.sol,UNCERTAIN,escrow_release,2,processRequest,9,대금 해제 조건이 외부 중재자의 판정에 전적으로 의존하므로 해당 구현과 신뢰 가정이 필요합니다.
+case_258.sol,UNCERTAIN,rescue_and_escrow,1,dispatch,9,회수 가능 초과액을 외부 회계 모듈이 계산하므로 사용자 부채 포함 여부를 확인할 수 없습니다.
+case_259.sol,UNCERTAIN,liquidation_math,1,executeAction,9,압류량 계산이 외부 위험 엔진에 위임되어 있어 비례성·상한·가격 단위를 확인할 수 없습니다.
+case_260.sol,MALICIOUS,repeatable_claim,1,routeValue,8,청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다.
+case_261.sol,BENIGN,fee_configuration,4,reconcile,8,수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다.
+case_262.sol,BENIGN,escrow_release,5,settlePosition,9,대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다.
+case_263.sol,BENIGN,rounding_extraction,3,executeAction,8,지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다.
+case_264.sol,BENIGN,fee_configuration,2,handle,8,수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다.
+case_265.sol,BENIGN,fee_configuration,5,complete,8,수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다.
+case_266.sol,MALICIOUS,fee_configuration,5,commitState,8,특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다.
+case_267.sol,UNCERTAIN,fee_configuration,2,submit,8,수수료율과 수령처가 외부 정책에서 반환되어 코드만으로 최대치와 관리자 이익 여부를 알 수 없습니다.
+case_268.sol,MALICIOUS,cross_domain_replay,1,handle,7,브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다.
+case_269.sol,MALICIOUS,rescue_and_escrow,2,applyUpdate,8,사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다.
+case_270.sol,MALICIOUS,fee_configuration,1,synchronize,8,특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다.
+case_271.sol,BENIGN,asymmetric_transfer_gate,1,perform,10,전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다.
+case_272.sol,MALICIOUS,reentrancy_withdrawal,1,handle,7,외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다.
+case_273.sol,UNCERTAIN,rounding_extraction,3,handle,10,반올림 방향과 환율이 외부 환산 모듈에 위임되어 있어 반복 추출 가능성을 판단할 수 없습니다.
+case_274.sol,MALICIOUS,supply_control,5,executeAction,9,특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다.
+case_275.sol,BENIGN,forced_ether_boundary,2,settlePosition,7,사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다.
+case_276.sol,UNCERTAIN,multicall_value_reuse,2,perform,9,배치별 msg.value 소비량을 외부 회계 모듈이 승인하므로 해당 모듈의 중복 방지 규칙을 확인해야 합니다.
+case_277.sol,BENIGN,vault_share_inflation,3,applyUpdate,7,가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다.
+case_278.sol,MALICIOUS,liquidation_math,2,dispatch,7,청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다.
+case_279.sol,BENIGN,token_return_accounting,2,routeValue,8,토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다.
+case_280.sol,MALICIOUS,unchecked_arithmetic,4,synchronize,7,unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다.
+case_281.sol,UNCERTAIN,vault_share_inflation,2,finalizeOperation,10,지분 환산을 외부 회계 모듈이 계산하므로 기부와 반올림 처리 방식을 확인할 수 없습니다.
+case_282.sol,MALICIOUS,arbitrary_wallet_execution,2,updateRecord,6,누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다.
+case_283.sol,MALICIOUS,liquidation_math,4,complete,7,청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다.
+case_284.sol,MALICIOUS,vault_share_inflation,5,updateRecord,7,첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다.
+case_285.sol,BENIGN,predictable_randomness,1,reconcile,8,가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다.
+case_286.sol,BENIGN,oracle_lending,5,settlePosition,10,대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다.
+case_287.sol,BENIGN,supply_control,1,finalizeOperation,10,발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다.
+case_288.sol,MALICIOUS,predictable_randomness,2,commitState,7,상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다.
+case_289.sol,UNCERTAIN,supply_control,2,reconcile,11,발행 가능량을 외부 정책 컨트랙트가 결정하므로 그 구현 없이는 상한의 실효성을 확정할 수 없습니다.
+case_290.sol,BENIGN,predictable_randomness,4,submit,8,가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다.
+case_291.sol,BENIGN,privileged_confiscation,1,perform,8,소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다.
+case_292.sol,BENIGN,unchecked_arithmetic,2,routeValue,7,전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다.
+case_293.sol,MALICIOUS,vault_share_inflation,1,handle,7,첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다.
+case_294.sol,MALICIOUS,escrow_release,3,perform,8,판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다.
+case_295.sol,BENIGN,nft_stale_approval,4,reconcile,8,소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다.
+case_296.sol,UNCERTAIN,delegate_execution,1,applyUpdate,8,delegatecall 대상의 선택과 승인 여부를 외부 관리자 모듈이 결정하므로 제공된 코드만으로 안전성을 확정할 수 없습니다.
+case_297.sol,MALICIOUS,oracle_lending,4,handle,10,누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다.
+case_298.sol,MALICIOUS,unchecked_arithmetic,2,applyUpdate,7,unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다.
+case_299.sol,BENIGN,asymmetric_transfer_gate,3,dispatch,10,전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다.
+case_300.sol,UNCERTAIN,privileged_confiscation,2,submit,8,제3자 잔액 조정 허용 여부가 외부 준법 정책에 의존해 그 권한 범위를 확인할 수 없습니다.

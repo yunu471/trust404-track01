@@ -1,0 +1,6615 @@
+[
+  {
+    "file": "case_001.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 5,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_002.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_003.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_004.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 4,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_005.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_006.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_007.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_008.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "담보 가격과 갱신 시점이 외부 오라클 구현에 의존하므로 조작 저항성과 최신성을 판단할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 12
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "oracle_lending",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_009.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_010.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_011.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "대금 해제 조건이 외부 중재자의 판정에 전적으로 의존하므로 해당 구현과 신뢰 가정이 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "escrow_release",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_012.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_013.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 4,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_014.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_015.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_016.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 3,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_017.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_018.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_019.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "지분 환산을 외부 회계 모듈이 계산하므로 기부와 반올림 처리 방식을 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "vault_share_inflation",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_020.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "메시지 고유성과 도메인 검증이 외부 메신저의 consume 구현에 의존합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "cross_domain_replay",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_021.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_022.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_023.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "unchecked 연산의 사전조건을 외부 한도 모듈이 보증하도록 되어 있어 그 구현 없이는 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "unchecked_arithmetic",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_024.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "delegatecall 대상의 선택과 승인 여부를 외부 관리자 모듈이 결정하므로 제공된 코드만으로 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "delegate_execution",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_025.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_026.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_027.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_028.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_029.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_030.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_031.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "발행 가능량을 외부 정책 컨트랙트가 결정하므로 그 구현 없이는 상한의 실효성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "supply_control",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_032.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_033.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_034.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_035.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_036.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "회수 가능 초과액을 외부 회계 모듈이 계산하므로 사용자 부채 포함 여부를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "rescue_and_escrow",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_037.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_038.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_039.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "당첨 난수의 안전성이 외부 비콘 구현과 완료 보장에 의존하므로 제공된 코드만으로 판단할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "predictable_randomness",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_040.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_041.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 5,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_042.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_043.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_044.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 5,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_045.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_046.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_047.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_048.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_049.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "압류량 계산이 외부 위험 엔진에 위임되어 있어 비례성·상한·가격 단위를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "liquidation_math",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_050.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_051.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_052.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 4,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_053.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_054.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_055.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_056.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "저수준 토큰 호출의 반환 형식과 성공 의미가 외부 토큰 구현에 달려 있어 제공된 코드만으로 회계 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "token_return_accounting",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_057.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_058.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_059.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "수수료율과 수령처가 외부 정책에서 반환되어 코드만으로 최대치와 관리자 이익 여부를 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "fee_configuration",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_060.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "담보 가격과 갱신 시점이 외부 오라클 구현에 의존하므로 조작 저항성과 최신성을 판단할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 12
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "oracle_lending",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_061.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_062.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_063.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 4,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_064.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_065.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_066.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "메시지 고유성과 도메인 검증이 외부 메신저의 consume 구현에 의존합니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "cross_domain_replay",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_067.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_068.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_069.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 3,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_070.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_071.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_072.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "제3자 잔액 조정 허용 여부가 외부 준법 정책에 의존해 그 권한 범위를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "privileged_confiscation",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_073.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 5,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_074.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_075.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_076.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_077.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_078.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_079.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 5,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_080.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_081.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 6
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_082.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 5,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_083.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "업그레이드 허용 여부가 외부 권한 관리자에 의해 결정되므로 그 구성과 구현을 확인해야 합니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "initialization_and_upgrade",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_084.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "최종 권한 판정이 외부 권한 모듈에 위임되어 있어 호출자·원발신자 처리 규칙을 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "authorization_identity",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_085.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_086.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_087.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "최종 권한 판정이 외부 권한 모듈에 위임되어 있어 호출자·원발신자 처리 규칙을 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "authorization_identity",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_088.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "임의 호출 권한이 외부 권한 레지스트리 반환값에 의존하므로 실제 승인 범위를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "arbitrary_wallet_execution",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_089.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 3,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_090.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_091.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "delegatecall 대상의 선택과 승인 여부를 외부 관리자 모듈이 결정하므로 제공된 코드만으로 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "delegate_execution",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_092.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "승인 유효성과 정리를 외부 승인 레지스트리가 담당하므로 소유권 변경 시 무효화되는지 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "nft_stale_approval",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_093.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 4,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_094.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_095.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_096.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_097.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_098.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_099.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_100.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_101.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_102.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "업그레이드 허용 여부가 외부 권한 관리자에 의해 결정되므로 그 구성과 구현을 확인해야 합니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "initialization_and_upgrade",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_103.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "민감한 송금은 직접 호출자인 msg.sender를 소유자와 비교하므로 중간 컨트랙트가 권한을 빌릴 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_104.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "발행 가능량을 외부 정책 컨트랙트가 결정하므로 그 구현 없이는 상한의 실효성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "supply_control",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_105.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_106.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "중복 청구 방지가 외부 배포 관리자에 위임되어 있어 consume 함수의 일회성 보장을 확인해야 합니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "repeatable_claim",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_107.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_108.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_109.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_110.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_111.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_112.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_113.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_114.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_115.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_116.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_117.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_118.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_119.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_120.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_121.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_122.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_123.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "수신 ETH의 사용자 귀속 여부를 외부 레지스트리가 판정하므로 이 코드만으로 관리자 회수액에 사용자 자산이 포함되는지 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "forced_ether_boundary",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_124.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 4,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_125.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_126.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_127.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_128.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_129.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_130.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_131.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_132.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_133.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_134.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_135.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 6
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_136.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_137.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_138.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "저수준 토큰 호출의 반환 형식과 성공 의미가 외부 토큰 구현에 달려 있어 제공된 코드만으로 회계 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "token_return_accounting",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_139.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 5,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_140.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_141.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_142.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "업그레이드 허용 여부가 외부 권한 관리자에 의해 결정되므로 그 구성과 구현을 확인해야 합니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "initialization_and_upgrade",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_143.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_144.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_145.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "반올림 방향과 환율이 외부 환산 모듈에 위임되어 있어 반복 추출 가능성을 판단할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "rounding_extraction",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_146.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_147.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_148.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "청구 상태를 외부 송금 전에 기록하여 동일 배정의 중복 청구와 재진입 청구를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_149.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_150.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 5,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_151.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_152.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_153.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_154.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 4,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_155.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_156.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_157.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "관리자는 생성자에서 확정되고 구현 변경은 관리자에게만 허용되며 새 구현의 코드 존재도 검사합니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_158.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_159.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_160.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_161.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "수신 ETH의 사용자 귀속 여부를 외부 레지스트리가 판정하므로 이 코드만으로 관리자 회수액에 사용자 자산이 포함되는지 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "forced_ether_boundary",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_162.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_163.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 6
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_164.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_165.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "재사용 방지와 도메인 검증이 외부 서명 검증기에 위임되어 있어 해당 구현 없이는 판정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "signature_replay",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_166.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_167.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_168.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_169.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_170.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_171.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_172.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "토큰 transferFrom의 false 반환을 무시하고 예치 잔액을 기록하므로 자산을 받지 않고도 기존 풀 자산에 대한 인출권을 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_173.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_174.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 4,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_175.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_176.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "당첨 난수의 안전성이 외부 비콘 구현과 완료 보장에 의존하므로 제공된 코드만으로 판단할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "predictable_randomness",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_177.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_178.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_179.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_180.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_181.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "배치별 msg.value 소비량을 외부 회계 모듈이 승인하므로 해당 모듈의 중복 방지 규칙을 확인해야 합니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "multicall_value_reuse",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_182.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_183.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "최종 권한 판정이 외부 권한 모듈에 위임되어 있어 호출자·원발신자 처리 규칙을 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "authorization_identity",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_184.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "승인 유효성과 정리를 외부 승인 레지스트리가 담당하므로 소유권 변경 시 무효화되는지 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "nft_stale_approval",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_185.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 대상과 calldata로 delegatecall하여 현재 컨트랙트의 저장소와 자산 제어를 변경할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_186.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 5,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_187.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_188.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_189.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_190.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "임의 호출 권한이 외부 권한 레지스트리 반환값에 의존하므로 실제 승인 범위를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "arbitrary_wallet_execution",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_191.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "저수준 토큰 호출의 반환 형식과 성공 의미가 외부 토큰 구현에 달려 있어 제공된 코드만으로 회계 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "token_return_accounting",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_192.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_193.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_194.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_195.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "전송 허용 여부가 외부 정책의 반환값에 의존하며 해당 정책 구현이 제공되지 않았습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "asymmetric_transfer_gate",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_196.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_197.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_198.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 임의 보유자의 잔액을 차감해 자신에게 이전할 수 있어 사용자 자산 몰수 경로가 존재합니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_199.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "중복 청구 방지가 외부 배포 관리자에 위임되어 있어 consume 함수의 일회성 보장을 확인해야 합니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "repeatable_claim",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_200.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_201.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_202.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_203.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_204.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 4,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_205.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_206.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 4,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_207.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_208.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "unchecked 연산의 사전조건을 외부 한도 모듈이 보증하도록 되어 있어 그 구현 없이는 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "unchecked_arithmetic",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_209.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 5,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_210.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "민감한 송금 권한을 tx.origin으로 검사하여 소유자가 악성 중간 컨트랙트를 호출하면 금고 자산이 탈취될 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "authorization_identity",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_211.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 4,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_212.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "전송 허용 여부가 외부 정책의 반환값에 의존하며 해당 정책 구현이 제공되지 않았습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "asymmetric_transfer_gate",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_213.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "재사용 방지와 도메인 검증이 외부 서명 검증기에 위임되어 있어 해당 구현 없이는 판정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "signature_replay",
+    "variant": 2,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_214.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_215.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "외부 송금 전에 잔액을 차감하고 재진입 잠금도 적용하여 동일 예치금의 중복 인출을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_216.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "서명 메시지에 nonce·체인·컨트랙트 도메인이 없고 사용 기록도 없어 동일 서명으로 지급을 반복할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 3,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_217.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_218.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "제3자 잔액 조정 허용 여부가 외부 준법 정책에 의존해 그 권한 범위를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "privileged_confiscation",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_219.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_220.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_221.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 3,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_222.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "담보 가격과 갱신 시점이 외부 오라클 구현에 의존하므로 조작 저항성과 최신성을 판단할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 12
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "oracle_lending",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_223.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "재사용 방지와 도메인 검증이 외부 서명 검증기에 위임되어 있어 해당 구현 없이는 판정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "signature_replay",
+    "variant": 3,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_224.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_225.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "전송 허용 여부가 외부 정책의 반환값에 의존하며 해당 정책 구현이 제공되지 않았습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "asymmetric_transfer_gate",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_226.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_227.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "임의 호출 기능은 지갑 소유자만 사용할 수 있고 컨트랙트에는 제3자별 예치 청구권이 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_228.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_229.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_230.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_231.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "메시지에 chainid와 컨트랙트 주소를 포함하고 처리 해시를 송금 전에 기록해 재실행을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 5,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_232.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "관리자는 제한을 우회하지만 일반 보유자는 관리자가 설정한 잠금 때문에 전송할 수 있는 비대칭 허니팟 경로가 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_233.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_234.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 4,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_235.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "출금 상태 확정과 실제 송금을 외부 결제 라우터가 담당하므로 그 콜백·회계 구현 없이는 재진입 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "reentrancy_withdrawal",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_236.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "출금 상태 확정과 실제 송금을 외부 결제 라우터가 담당하므로 그 콜백·회계 구현 없이는 재진입 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "reentrancy_withdrawal",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_237.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "초기화되지 않은 소유권과 구현 주소를 누구나 설정할 수 있어 공격자가 업그레이드 권한과 프록시 상태를 장악할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "initialization_and_upgrade",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_238.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 대상은 생성 시 배포된 고정 코드이고 호출 선택자도 고정되어 임의 코드 실행 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "delegate_execution",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_239.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "출금 상태 확정과 실제 송금을 외부 결제 라우터가 담당하므로 그 콜백·회계 구현 없이는 재진입 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "reentrancy_withdrawal",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_240.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_241.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "NFT 이전 후 기존 토큰 승인을 지우지 않아 이전 소유자가 승인한 계정이 새 소유자의 토큰을 다시 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_242.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_243.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "압류 담보가 실제 상환액에 보너스를 적용한 값으로 계산되고 차주의 남은 담보로 제한됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_244.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 5,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_245.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_246.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "지분 환산을 외부 회계 모듈이 계산하므로 기부와 반올림 처리 방식을 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "vault_share_inflation",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_247.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 6
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_248.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치 경로와 개인 장부가 있는데 관리자가 전체 ETH 잔고를 회수할 수 있어 사용자 자산이 함께 이전됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_249.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "서명에 nonce, 만료, chainid와 컨트랙트 주소가 결합되고 nonce를 지급 전에 증가시켜 재사용을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "signature_replay",
+    "variant": 3,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_250.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "payable multicall의 각 delegatecall이 같은 msg.value를 보존하므로 한 번 보낸 ETH를 여러 번 예치 잔액으로 기록할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_251.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "구조 함수는 기록된 사용자 부채를 제외한 초과 ETH만 회수하므로 예치 원금을 침해하지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_252.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "매번 사용자에게 유리하게 올림하여 지급하므로 큰 환전을 여러 개로 분할하면 준비금에서 초과 가치를 반복 추출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_253.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "delegatecall 배치는 msg.value가 0일 때만 허용되어 하나의 ETH 값을 여러 하위 호출에서 중복 회계할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "multicall_value_reuse",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_254.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_255.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "반올림 방향과 환율이 외부 환산 모듈에 위임되어 있어 반복 추출 가능성을 판단할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "rounding_extraction",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_256.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_257.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "대금 해제 조건이 외부 중재자의 판정에 전적으로 의존하므로 해당 구현과 신뢰 가정이 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "processRequest",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "escrow_release",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_258.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "회수 가능 초과액을 외부 회계 모듈이 계산하므로 사용자 부채 포함 여부를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "rescue_and_escrow",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_259.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "압류량 계산이 외부 위험 엔진에 위임되어 있어 비례성·상한·가격 단위를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "liquidation_math",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_260.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청구 후 사용 여부를 기록하지 않아 같은 수령자가 동일한 배정을 반복 청구할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "repeatable_claim",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_261.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_262.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대금은 구매자 확인 또는 정해진 환불 경로를 통해서만 이동하며 지급 전에 상태가 확정됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 9
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_263.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지급액을 준비금에 불리하지 않게 내림하고 0 출력 거래를 거부해 분할 반올림 수익을 차단합니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "rounding_extraction",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_264.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_265.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "수수료율이 코드상 낮은 상한으로 제한되고 수수료 수령처가 별도 공개 주소여서 전액 몰수 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_266.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_267.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "수수료율과 수령처가 외부 정책에서 반환되어 코드만으로 최대치와 관리자 이익 여부를 알 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "fee_configuration",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_268.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "브리지 지급 메시지에 목적 체인·컨트랙트 도메인과 처리 기록이 없어 동일 승인을 여러 번 또는 다른 배포본에서 재사용할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "cross_domain_replay",
+    "variant": 1,
+    "source_refs": [
+      "https://swcregistry.io/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_269.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "사용자 예치금을 보관하면서 관리자가 장부와 무관하게 컨트랙트의 ETH 전액을 구조 명목으로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "rescue_and_escrow",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_270.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 전송 수수료를 100%까지 올려 일반 사용자의 전송액 전부를 관리자에게 보내도록 만들 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "fee_configuration",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20"
+    ]
+  },
+  {
+    "file": "case_271.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_272.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "외부 송금 뒤에 잔액을 차감하므로 수신자가 재진입해 같은 예치금을 반복 인출할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "reentrancy_withdrawal",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://immunefi.com/blog/bug-fix-reviews/openzeppelin-reentrancy-bugfix-review/"
+    ]
+  },
+  {
+    "file": "case_273.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "반올림 방향과 환율이 외부 환산 모듈에 위임되어 있어 반복 추출 가능성을 판단할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "rounding_extraction",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_274.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "특권 계정이 코드로 강제된 공급 상한 없이 총공급량과 자신의 잔고를 늘릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeAction",
+        "line": 9
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 5,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_275.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "사용자 예치 경로가 없고 관리자는 강제 송금될 수 있는 미귀속 ETH만 회수하므로 과제의 자산 귀속 기준상 탈취 경로가 아닙니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "forced_ether_boundary",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_276.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "배치별 msg.value 소비량을 외부 회계 모듈이 승인하므로 해당 모듈의 중복 방지 규칙을 확인해야 합니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 9
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "multicall_value_reuse",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_277.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가상 자산과 가상 지분 오프셋을 사용하고 0 지분 발행을 거부해 첫 예치·기부 인플레이션을 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 3,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_278.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_279.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "토큰 전송의 성공 반환값을 확인한 뒤에만 예치 잔액을 기록합니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "token_return_accounting",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_280.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "synchronize",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_281.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "지분 환산을 외부 회계 모듈이 계산하므로 기부와 반올림 처리 방식을 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 10
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.5,
+    "category": "vault_share_inflation",
+    "variant": 2,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_282.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 금고 명의로 임의 대상·calldata·ETH 값을 호출할 수 있어 보관 자산과 승인 권한을 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 6
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.99,
+    "category": "arbitrary_wallet_execution",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_283.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "청산자가 상환한 부채액과 무관하게 차주의 담보 전액을 받으므로 극소액 상환으로 전체 담보를 탈취할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "complete",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "liquidation_math",
+    "variant": 4,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_284.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateRecord",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 5,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_285.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_286.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "대출 가치는 변경 불가능한 보수적 기준가와 코드로 강제된 담보비율만 사용합니다."
+    ],
+    "evidence": [
+      {
+        "function": "settlePosition",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 5,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_287.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "발행 권한은 존재하지만 모든 발행 경로에 불변 공급 상한이 코드로 강제됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "finalizeOperation",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "supply_control",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_288.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "상금 수령자를 현재 블록 속성과 호출자가 선택하는 값으로 계산해 블록 생산자나 반복 시도자가 결과를 편향할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "commitState",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_289.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "발행 가능량을 외부 정책 컨트랙트가 결정하므로 그 구현 없이는 상한의 실효성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "supply_control",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/api/token/erc20",
+      "https://docs.openzeppelin.com/contracts/5.x/access-control"
+    ]
+  },
+  {
+    "file": "case_290.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "가치 이전 대상은 예치 시 확정된 순번으로 결정되며 블록 난수는 자산 판정에 사용되지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "predictable_randomness",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_291.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소각은 호출자 자신의 잔액에만 적용되고 제3자 잔액을 이전하거나 감소시키는 특권 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "privileged_confiscation",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_292.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 전 잔액을 검사하고 Solidity의 기본 checked 산술로 차감하여 언더플로를 막습니다."
+    ],
+    "evidence": [
+      {
+        "function": "routeValue",
+        "line": 7
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_293.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "첫 예치자가 직접 송금으로 자산/지분 비율을 왜곡해 후속 예치자의 지분을 0으로 반올림시키고 가치를 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "vault_share_inflation",
+    "variant": 1,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://immunefi.com/blog/bug-fix-reviews/balancer-rounding-error/"
+    ]
+  },
+  {
+    "file": "case_294.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "판매자가 구매자 확인이나 분쟁 판정 없이 예치 대금을 즉시 자신에게 해제할 수 있어 미이행 상태에서 자산을 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "perform",
+        "line": 8
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "escrow_release",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://immunefi.com/blog/bug-fix-reviews/enzyme-finance-privilege-check/"
+    ]
+  },
+  {
+    "file": "case_295.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "소유권 변경 전에 토큰별 승인을 삭제하여 이전 소유자의 권한이 새 소유자에게 이어지지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 8
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "nft_stale_approval",
+    "variant": 4,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_296.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "delegatecall 대상의 선택과 승인 여부를 외부 관리자 모듈이 결정하므로 제공된 코드만으로 안전성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "delegate_execution",
+    "variant": 1,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_297.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "누구나 담보 가격을 설정할 수 있고 대출 한도가 즉시 그 값을 사용하므로 가격을 부풀려 금고 자산을 빌릴 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "handle",
+        "line": 10
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "oracle_lending",
+    "variant": 4,
+    "source_refs": [
+      "https://immunefi.com/blog/bug-fix-reviews/silo-finance-logic-error/",
+      "https://docs.soliditylang.org/en/latest/security-considerations.html"
+    ]
+  },
+  {
+    "file": "case_298.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "unchecked 잔액 차감 전에 충분한 잔액을 검사하지 않아 언더플로로 거대한 잔액을 만든 뒤 가치를 이전할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "applyUpdate",
+        "line": 7
+      }
+    ],
+    "risk_level": "HIGH",
+    "risk_type": "VULNERABILITY",
+    "confidence": 0.99,
+    "category": "unchecked_arithmetic",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_299.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "전송 정지는 관리자 자신을 포함한 모든 발신자에게 동일하게 적용되므로 자산을 관리자에게 이전하는 비대칭 경로가 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "dispatch",
+        "line": 10
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE",
+    "confidence": 0.99,
+    "category": "asymmetric_transfer_gate",
+    "variant": 3,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  },
+  {
+    "file": "case_300.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "제3자 잔액 조정 허용 여부가 외부 준법 정책에 의존해 그 권한 범위를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "submit",
+        "line": 8
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "BACKDOOR",
+    "confidence": 0.5,
+    "category": "privileged_confiscation",
+    "variant": 2,
+    "source_refs": [
+      "https://docs.openzeppelin.com/contracts/5.x/access-control",
+      "https://swcregistry.io/"
+    ]
+  }
+]

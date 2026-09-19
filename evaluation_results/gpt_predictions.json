@@ -1,0 +1,4336 @@
+[
+  {
+    "file": "B001.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B002.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "mint()는 발행 전 공급량 상한을 코드로 강제합니다 (totalSupply + amount <= MAX_SUPPLY). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 22
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B003.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B004.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 credit[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 14
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B005.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B006.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B007.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B008.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B009.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "release()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다.",
+      "refund()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "release",
+        "line": 22
+      },
+      {
+        "function": "refund",
+        "line": 29
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B010.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B011.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B012.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B013.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B014.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 deposits[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 16
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B015.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B016.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B017.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "mint()는 발행 전 공급량 상한을 코드로 강제합니다 (totalSupply + amount <= MAX_SUPPLY). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 17
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B018.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "transfer()의 전송 제한(paused)은 소유자를 포함해 모든 주소에 동일하게 적용되는 대칭적 가용성 제약이므로 자산이 남의 손으로 넘어가는 경로가 아닙니다. 다만 소유자가 이 플래그를 제어한다면 중앙화 위험으로 부기합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 18
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B019.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B020.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 credit[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 14
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B021.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B022.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B023.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B024.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B025.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "release()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다.",
+      "refund()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "release",
+        "line": 22
+      },
+      {
+        "function": "refund",
+        "line": 29
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B026.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B027.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B028.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B029.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B030.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 deposits[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 16
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B031.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B032.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B033.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "mint()는 발행 전 공급량 상한을 코드로 강제합니다 (totalSupply + amount <= MAX_SUPPLY). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 17
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B034.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "transfer()의 전송 제한(paused)은 소유자를 포함해 모든 주소에 동일하게 적용되는 대칭적 가용성 제약이므로 자산이 남의 손으로 넘어가는 경로가 아닙니다. 다만 소유자가 이 플래그를 제어한다면 중앙화 위험으로 부기합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 18
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B035.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B036.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 credit[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 14
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B037.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B038.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B039.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B040.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B041.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "release()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다.",
+      "refund()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "release",
+        "line": 22
+      },
+      {
+        "function": "refund",
+        "line": 29
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B042.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B043.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B044.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B045.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B046.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 deposits[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 16
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B047.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B048.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B049.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "mint()는 발행 전 공급량 상한을 코드로 강제합니다 (totalSupply + amount <= MAX_SUPPLY). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 17
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B050.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "transfer()의 전송 제한(paused)은 소유자를 포함해 모든 주소에 동일하게 적용되는 대칭적 가용성 제약이므로 자산이 남의 손으로 넘어가는 경로가 아닙니다. 다만 소유자가 이 플래그를 제어한다면 중앙화 위험으로 부기합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 18
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B051.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B052.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 credit[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 14
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B053.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B054.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B055.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B056.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B057.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "release()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다.",
+      "refund()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "release",
+        "line": 22
+      },
+      {
+        "function": "refund",
+        "line": 29
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B058.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B059.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B060.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B061.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B062.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 deposits[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 16
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B063.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B064.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B065.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "mint()는 발행 전 공급량 상한을 코드로 강제합니다 (totalSupply + amount <= MAX_SUPPLY). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 17
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B066.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "transfer()의 전송 제한(paused)은 소유자를 포함해 모든 주소에 동일하게 적용되는 대칭적 가용성 제약이므로 자산이 남의 손으로 넘어가는 경로가 아닙니다. 다만 소유자가 이 플래그를 제어한다면 중앙화 위험으로 부기합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 18
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B067.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B068.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 credit[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 14
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B069.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B070.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B071.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B072.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B073.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "release()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다.",
+      "refund()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "release",
+        "line": 22
+      },
+      {
+        "function": "refund",
+        "line": 29
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B074.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B075.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B076.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B077.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B078.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 deposits[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 16
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B079.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B080.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B081.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "mint()는 발행 전 공급량 상한을 코드로 강제합니다 (totalSupply + amount <= MAX_SUPPLY). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 17
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B082.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "transfer()의 전송 제한(paused)은 소유자를 포함해 모든 주소에 동일하게 적용되는 대칭적 가용성 제약이므로 자산이 남의 손으로 넘어가는 경로가 아닙니다. 다만 소유자가 이 플래그를 제어한다면 중앙화 위험으로 부기합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 18
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B083.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B084.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 credit[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 14
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B085.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B086.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B087.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B088.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B089.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "release()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다.",
+      "refund()는 컨트랙트 잔고를 이동시키지만, 이 컨트랙트에는 예치 경로(사용자 자산으로 귀속되는 매핑)가 없습니다. 강제 송금된 ETH는 이 문제셋의 자산 귀속 가정상 사용자 자산으로 보지 않으므로 소유자 회수를 탈취로 세지 않습니다."
+    ],
+    "evidence": [
+      {
+        "function": "release",
+        "line": 22
+      },
+      {
+        "function": "refund",
+        "line": 29
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B090.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B091.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B092.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B093.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B094.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 deposits[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 16
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B095.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B096.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B097.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "mint()는 발행 전 공급량 상한을 코드로 강제합니다 (totalSupply + amount <= MAX_SUPPLY). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 17
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B098.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "transfer()의 전송 제한(paused)은 소유자를 포함해 모든 주소에 동일하게 적용되는 대칭적 가용성 제약이므로 자산이 남의 손으로 넘어가는 경로가 아닙니다. 다만 소유자가 이 플래그를 제어한다면 중앙화 위험으로 부기합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 18
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "B099.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "B100.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "withdraw()는 외부 전송 전에 credit[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 14
+      }
+    ],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "M001.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "distributeRewards()는 modifier onlyOwner 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "distributeRewards",
+        "line": 25
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M002.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 whitelist[msg.sender] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 setWhitelist()에서 소유자만 변경할 수 있습니다(modifier onlyOwner). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 31
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M003.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "execute()는 소유자(modifier onlyOwner)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 30
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M004.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transferFrom()는 소유자(controller)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transferFrom",
+        "line": 20
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M005.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeModule()는 소유자(modifier onlyOwner)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeModule",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M006.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "syncLiquidity()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. deposits 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "syncLiquidity",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M007.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "normalize()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "normalize",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M008.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 19
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M009.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "clean()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "clean",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M010.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settle()는 소유자 전용 함수(modifier onlyOperator)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "settle",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M011.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "route()는 modifier onlyOwner로, 함수 인자로 받은 임의 대상(target)에 임의 금액(value)을 저수준 call로 전송할 수 있습니다. 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어, address(this).balance를 직접 쓰지 않아도 예치금을 임의 주소로 우회 인출할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "route",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M012.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "recoverFrozen()는 소유자 전용 함수(modifier onlyController)로, 승인(allowance) 절차 없이 임의 계정(user)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "recoverFrozen",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M013.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateReserve()는 modifier onlyManager 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateReserve",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M014.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(taxBps)이 세터 없이 생성 시점부터 99% 로 고정되어 있습니다. 세터가 없다는 것이 안전을 뜻하지 않으며, 이미 처음부터 전송 가치의 상당 부분을 소유자가 가져가는 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M015.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "withdraw()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 22
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M016.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "syncRewards()는 modifier onlyOwner 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "syncRewards",
+        "line": 16
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M017.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 permitted[msg.sender] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 setTradingState()에서 소유자만 변경할 수 있습니다(modifier onlyOwner). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M018.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M019.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 setFee()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M020.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transferFrom()는 소유자(controller)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transferFrom",
+        "line": 20
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M021.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeModule()는 소유자(modifier onlyOwner)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeModule",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M022.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "syncLiquidity()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. deposits 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "syncLiquidity",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M023.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "normalize()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "normalize",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M024.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 19
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M025.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "clean()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "clean",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M026.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settle()는 소유자 전용 함수(modifier onlyOperator)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "settle",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M027.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "route()는 modifier onlyOwner로, 함수 인자로 받은 임의 대상(target)에 임의 금액(value)을 저수준 call로 전송할 수 있습니다. 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어, address(this).balance를 직접 쓰지 않아도 예치금을 임의 주소로 우회 인출할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "route",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M028.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "recoverFrozen()는 소유자 전용 함수(modifier onlyController)로, 승인(allowance) 절차 없이 임의 계정(user)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "recoverFrozen",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M029.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateReserve()는 modifier onlyManager 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateReserve",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M030.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(taxBps)이 세터 없이 생성 시점부터 99% 로 고정되어 있습니다. 세터가 없다는 것이 안전을 뜻하지 않으며, 이미 처음부터 전송 가치의 상당 부분을 소유자가 가져가는 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M031.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "withdraw()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 22
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M032.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "rebalancePool()는 modifier onlyOwner 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "rebalancePool",
+        "line": 16
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M033.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 permitted[msg.sender] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 configureUser()에서 소유자만 변경할 수 있습니다(modifier onlyOwner). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M034.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M035.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 setFee()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M036.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transferFrom()는 소유자(controller)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transferFrom",
+        "line": 20
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M037.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeModule()는 소유자(modifier onlyOwner)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeModule",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M038.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "syncLiquidity()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. deposits 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "syncLiquidity",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M039.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "normalize()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "normalize",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M040.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 19
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M041.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "clean()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "clean",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M042.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settle()는 소유자 전용 함수(modifier onlyOperator)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "settle",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M043.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "route()는 modifier onlyOwner로, 함수 인자로 받은 임의 대상(target)에 임의 금액(value)을 저수준 call로 전송할 수 있습니다. 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어, address(this).balance를 직접 쓰지 않아도 예치금을 임의 주소로 우회 인출할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "route",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M044.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "recoverFrozen()는 소유자 전용 함수(modifier onlyController)로, 승인(allowance) 절차 없이 임의 계정(user)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "recoverFrozen",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M045.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateReserve()는 modifier onlyManager 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateReserve",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M046.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(taxBps)이 세터 없이 생성 시점부터 99% 로 고정되어 있습니다. 세터가 없다는 것이 안전을 뜻하지 않으며, 이미 처음부터 전송 가치의 상당 부분을 소유자가 가져가는 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M047.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "withdraw()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 22
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M048.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateIndex()는 modifier onlyOwner 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateIndex",
+        "line": 16
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M049.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 permitted[msg.sender] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 updateRoute()에서 소유자만 변경할 수 있습니다(modifier onlyOwner). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M050.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M051.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 setFee()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M052.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transferFrom()는 소유자(controller)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transferFrom",
+        "line": 20
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M053.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeModule()는 소유자(modifier onlyOwner)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeModule",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M054.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "syncLiquidity()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. deposits 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "syncLiquidity",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M055.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "normalize()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "normalize",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M056.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 19
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M057.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "clean()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "clean",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M058.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settle()는 소유자 전용 함수(modifier onlyOperator)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "settle",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M059.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "route()는 modifier onlyOwner로, 함수 인자로 받은 임의 대상(target)에 임의 금액(value)을 저수준 call로 전송할 수 있습니다. 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어, address(this).balance를 직접 쓰지 않아도 예치금을 임의 주소로 우회 인출할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "route",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M060.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "recoverFrozen()는 소유자 전용 함수(modifier onlyController)로, 승인(allowance) 절차 없이 임의 계정(user)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "recoverFrozen",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M061.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateReserve()는 modifier onlyManager 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateReserve",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M062.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(taxBps)이 세터 없이 생성 시점부터 99% 로 고정되어 있습니다. 세터가 없다는 것이 안전을 뜻하지 않으며, 이미 처음부터 전송 가치의 상당 부분을 소유자가 가져가는 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M063.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "withdraw()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 22
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M064.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settleEpoch()는 modifier onlyOwner 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "settleEpoch",
+        "line": 16
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M065.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 permitted[msg.sender] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 setMember()에서 소유자만 변경할 수 있습니다(modifier onlyOwner). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M066.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M067.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 setFee()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M068.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transferFrom()는 소유자(controller)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transferFrom",
+        "line": 20
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M069.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeModule()는 소유자(modifier onlyOwner)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeModule",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M070.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "syncLiquidity()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. deposits 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "syncLiquidity",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M071.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "normalize()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "normalize",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M072.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 19
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M073.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "clean()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "clean",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M074.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settle()는 소유자 전용 함수(modifier onlyOperator)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "settle",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M075.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "route()는 modifier onlyOwner로, 함수 인자로 받은 임의 대상(target)에 임의 금액(value)을 저수준 call로 전송할 수 있습니다. 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어, address(this).balance를 직접 쓰지 않아도 예치금을 임의 주소로 우회 인출할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "route",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M076.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "recoverFrozen()는 소유자 전용 함수(modifier onlyController)로, 승인(allowance) 절차 없이 임의 계정(user)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "recoverFrozen",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M077.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateReserve()는 modifier onlyManager 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateReserve",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M078.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(taxBps)이 세터 없이 생성 시점부터 99% 로 고정되어 있습니다. 세터가 없다는 것이 안전을 뜻하지 않으며, 이미 처음부터 전송 가치의 상당 부분을 소유자가 가져가는 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M079.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "withdraw()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 22
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M080.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "refreshCredits()는 modifier onlyOwner 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "refreshCredits",
+        "line": 16
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M081.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 permitted[msg.sender] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 setAccess()에서 소유자만 변경할 수 있습니다(modifier onlyOwner). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M082.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M083.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 setFee()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M084.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transferFrom()는 소유자(controller)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transferFrom",
+        "line": 20
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M085.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "executeModule()는 소유자(modifier onlyOwner)가 지정하는 임의 대상(target)에 delegatecall을 실행하여, 현재 컨트랙트의 스토리지 문맥에서 임의 코드를 실행할 수 있습니다. 이 경로로 소유권이나 잔고 기록을 변조해 사용자 자산을 탈취할 수 있는 백도어입니다."
+    ],
+    "evidence": [
+      {
+        "function": "executeModule",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M086.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "syncLiquidity()는 컨트랙트 전체 잔고를 직접 인출/파괴 경로로 이동시키지만, 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어 해당 잔고에는 사용자 자산이 포함됩니다. deposits 검사 없이 전체 잔고를 이동시키면 사용자 예치금을 탈취하는 경로가 됩니다."
+    ],
+    "evidence": [
+      {
+        "function": "syncLiquidity",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M087.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "normalize()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "normalize",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M088.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 19
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M089.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "clean()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "clean",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M090.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "settle()는 소유자 전용 함수(modifier onlyOperator)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "settle",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M091.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "route()는 modifier onlyOwner로, 함수 인자로 받은 임의 대상(target)에 임의 금액(value)을 저수준 call로 전송할 수 있습니다. 이 컨트랙트에는 사용자 예치 기록(deposits)이 있어, address(this).balance를 직접 쓰지 않아도 예치금을 임의 주소로 우회 인출할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "route",
+        "line": 13
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M092.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "recoverFrozen()는 소유자 전용 함수(modifier onlyController)로, 승인(allowance) 절차 없이 임의 계정(user)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "recoverFrozen",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M093.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "updateReserve()는 modifier onlyManager 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "updateReserve",
+        "line": 12
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M094.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(taxBps)이 세터 없이 생성 시점부터 99% 로 고정되어 있습니다. 세터가 없다는 것이 안전을 뜻하지 않으며, 이미 처음부터 전송 가치의 상당 부분을 소유자가 가져가는 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M095.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "withdraw()는 소유자(owner)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 22
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M096.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "syncRewards()는 modifier onlyOwner 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "syncRewards",
+        "line": 16
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M097.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 permitted[msg.sender] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 setTradingState()에서 소유자만 변경할 수 있습니다(modifier onlyOwner). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 21
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M098.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "reconcile()는 소유자 전용 함수(modifier onlyOwner)로, 승인(allowance) 절차 없이 임의 계정(account)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "reconcile",
+        "line": 15
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M099.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()는 전송액 중 일부를 소유자(owner) 잔고로 적립하는데, 그 비율(feeBps)을 소유자가 setFee()에서 최대 100% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 24
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "M100.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transferFrom()는 소유자(controller)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transferFrom",
+        "line": 20
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U001.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "mint()는 modifier onlyIssuer 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U002.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()는 송신자와 수신자 모두에 관리자 변경 가능한 차단 정책(blocked)을 적용합니다. 정상적인 차단 정책인지 선택적 동결 악용인지 운영 근거 없이 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U003.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "rescue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "rescue",
+        "line": 16
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U004.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 외부 호출(open)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U005.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 13
+      },
+      {
+        "function": "execute",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U006.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(unlockAt)을 setUnlock()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U007.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()의 외부 호출(validate)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U008.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "sweep()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "sweep",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U009.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()의 전송 제한(paused)이 소유자에게는 예외적으로 적용되지 않아, 소유자만 팔 수 있고 일반 보유자는 팔 수 없는 비대칭 구조입니다.",
+      "transfer()는 소유자(admin)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      },
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U010.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "bridgeMint()는 modifier onlyBridge 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다.",
+      "bridgeBurn()는 소유자 전용 함수(modifier onlyBridge)로, 승인(allowance) 절차 없이 임의 계정(from)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "bridgeMint",
+        "line": 12
+      },
+      {
+        "function": "bridgeBurn",
+        "line": 18
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U011.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 11
+      },
+      {
+        "function": "execute",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U012.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(frozen)을 setFrozen()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U013.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "redeem()의 외부 호출(quote)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U014.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U015.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "deploy()의 외부 호출(deposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "recall()의 외부 호출(withdraw)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "deploy",
+        "line": 19
+      },
+      {
+        "function": "recall",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U016.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "fallback()는 관리자가 변경하는 구현 주소(implementation)로 위임하는 프록시입니다. 업그레이드 권한의 신뢰성과 외부 구현을 확인하지 못해 정상 업그레이드인지 백도어인지 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "line": 21
+      },
+      {
+        "function": "fallback",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U017.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "mint()는 modifier onlyIssuer 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U018.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()는 송신자와 수신자 모두에 관리자 변경 가능한 차단 정책(blocked)을 적용합니다. 정상적인 차단 정책인지 선택적 동결 악용인지 운영 근거 없이 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U019.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "rescue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "rescue",
+        "line": 16
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U020.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 외부 호출(open)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U021.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 13
+      },
+      {
+        "function": "execute",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U022.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(unlockAt)을 setUnlock()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U023.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()의 외부 호출(validate)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U024.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "sweep()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "sweep",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U025.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()의 전송 제한(paused)이 소유자에게는 예외적으로 적용되지 않아, 소유자만 팔 수 있고 일반 보유자는 팔 수 없는 비대칭 구조입니다.",
+      "transfer()는 소유자(admin)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      },
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U026.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "bridgeMint()는 modifier onlyBridge 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다.",
+      "bridgeBurn()는 소유자 전용 함수(modifier onlyBridge)로, 승인(allowance) 절차 없이 임의 계정(from)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "bridgeMint",
+        "line": 12
+      },
+      {
+        "function": "bridgeBurn",
+        "line": 18
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U027.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 11
+      },
+      {
+        "function": "execute",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U028.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(frozen)을 setFrozen()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U029.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "redeem()의 외부 호출(quote)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U030.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U031.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "deploy()의 외부 호출(deposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "recall()의 외부 호출(withdraw)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "deploy",
+        "line": 19
+      },
+      {
+        "function": "recall",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U032.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "fallback()는 관리자가 변경하는 구현 주소(implementation)로 위임하는 프록시입니다. 업그레이드 권한의 신뢰성과 외부 구현을 확인하지 못해 정상 업그레이드인지 백도어인지 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "line": 21
+      },
+      {
+        "function": "fallback",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U033.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "mint()는 modifier onlyIssuer 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U034.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()는 송신자와 수신자 모두에 관리자 변경 가능한 차단 정책(blocked)을 적용합니다. 정상적인 차단 정책인지 선택적 동결 악용인지 운영 근거 없이 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U035.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "rescue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "rescue",
+        "line": 16
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U036.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 외부 호출(open)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U037.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 13
+      },
+      {
+        "function": "execute",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U038.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(unlockAt)을 setUnlock()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U039.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()의 외부 호출(validate)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U040.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "sweep()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "sweep",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U041.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()의 전송 제한(paused)이 소유자에게는 예외적으로 적용되지 않아, 소유자만 팔 수 있고 일반 보유자는 팔 수 없는 비대칭 구조입니다.",
+      "transfer()는 소유자(admin)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      },
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U042.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "bridgeMint()는 modifier onlyBridge 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다.",
+      "bridgeBurn()는 소유자 전용 함수(modifier onlyBridge)로, 승인(allowance) 절차 없이 임의 계정(from)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "bridgeMint",
+        "line": 12
+      },
+      {
+        "function": "bridgeBurn",
+        "line": 18
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U043.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 11
+      },
+      {
+        "function": "execute",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U044.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(frozen)을 setFrozen()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U045.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "redeem()의 외부 호출(quote)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U046.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U047.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "deploy()의 외부 호출(deposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "recall()의 외부 호출(withdraw)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "deploy",
+        "line": 19
+      },
+      {
+        "function": "recall",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U048.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "fallback()는 관리자가 변경하는 구현 주소(implementation)로 위임하는 프록시입니다. 업그레이드 권한의 신뢰성과 외부 구현을 확인하지 못해 정상 업그레이드인지 백도어인지 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "line": 21
+      },
+      {
+        "function": "fallback",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U049.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "mint()는 modifier onlyIssuer 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U050.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()는 송신자와 수신자 모두에 관리자 변경 가능한 차단 정책(blocked)을 적용합니다. 정상적인 차단 정책인지 선택적 동결 악용인지 운영 근거 없이 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U051.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "rescue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "rescue",
+        "line": 16
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U052.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 외부 호출(open)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U053.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 13
+      },
+      {
+        "function": "execute",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U054.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(unlockAt)을 setUnlock()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U055.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()의 외부 호출(validate)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U056.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "sweep()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "sweep",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U057.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()의 전송 제한(paused)이 소유자에게는 예외적으로 적용되지 않아, 소유자만 팔 수 있고 일반 보유자는 팔 수 없는 비대칭 구조입니다.",
+      "transfer()는 소유자(admin)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      },
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U058.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "bridgeMint()는 modifier onlyBridge 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다.",
+      "bridgeBurn()는 소유자 전용 함수(modifier onlyBridge)로, 승인(allowance) 절차 없이 임의 계정(from)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "bridgeMint",
+        "line": 12
+      },
+      {
+        "function": "bridgeBurn",
+        "line": 18
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U059.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 11
+      },
+      {
+        "function": "execute",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U060.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(frozen)을 setFrozen()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U061.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "redeem()의 외부 호출(quote)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U062.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U063.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "deploy()의 외부 호출(deposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "recall()의 외부 호출(withdraw)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "deploy",
+        "line": 19
+      },
+      {
+        "function": "recall",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U064.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "fallback()는 관리자가 변경하는 구현 주소(implementation)로 위임하는 프록시입니다. 업그레이드 권한의 신뢰성과 외부 구현을 확인하지 못해 정상 업그레이드인지 백도어인지 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "line": 21
+      },
+      {
+        "function": "fallback",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U065.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "mint()는 modifier onlyIssuer 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U066.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()는 송신자와 수신자 모두에 관리자 변경 가능한 차단 정책(blocked)을 적용합니다. 정상적인 차단 정책인지 선택적 동결 악용인지 운영 근거 없이 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U067.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "rescue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "rescue",
+        "line": 16
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U068.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 외부 호출(open)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U069.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 13
+      },
+      {
+        "function": "execute",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U070.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(unlockAt)을 setUnlock()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U071.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()의 외부 호출(validate)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U072.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "sweep()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "sweep",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U073.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()의 전송 제한(paused)이 소유자에게는 예외적으로 적용되지 않아, 소유자만 팔 수 있고 일반 보유자는 팔 수 없는 비대칭 구조입니다.",
+      "transfer()는 소유자(admin)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      },
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U074.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "bridgeMint()는 modifier onlyBridge 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다.",
+      "bridgeBurn()는 소유자 전용 함수(modifier onlyBridge)로, 승인(allowance) 절차 없이 임의 계정(from)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "bridgeMint",
+        "line": 12
+      },
+      {
+        "function": "bridgeBurn",
+        "line": 18
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U075.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 11
+      },
+      {
+        "function": "execute",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U076.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(frozen)을 setFrozen()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U077.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "redeem()의 외부 호출(quote)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U078.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U079.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "deploy()의 외부 호출(deposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "recall()의 외부 호출(withdraw)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "deploy",
+        "line": 19
+      },
+      {
+        "function": "recall",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U080.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "fallback()는 관리자가 변경하는 구현 주소(implementation)로 위임하는 프록시입니다. 업그레이드 권한의 신뢰성과 외부 구현을 확인하지 못해 정상 업그레이드인지 백도어인지 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "line": 21
+      },
+      {
+        "function": "fallback",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U081.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "mint()는 modifier onlyIssuer 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U082.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()는 송신자와 수신자 모두에 관리자 변경 가능한 차단 정책(blocked)을 적용합니다. 정상적인 차단 정책인지 선택적 동결 악용인지 운영 근거 없이 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U083.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "rescue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "rescue",
+        "line": 16
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U084.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 외부 호출(open)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U085.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 13
+      },
+      {
+        "function": "execute",
+        "line": 13
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U086.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(unlockAt)을 setUnlock()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U087.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()의 외부 호출(validate)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U088.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "sweep()의 외부 호출(transfer)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "sweep",
+        "line": 18
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U089.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "transfer()의 전송 제한(paused)이 소유자에게는 예외적으로 적용되지 않아, 소유자만 팔 수 있고 일반 보유자는 팔 수 없는 비대칭 구조입니다.",
+      "transfer()는 소유자(admin)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      },
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U090.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "bridgeMint()는 modifier onlyBridge 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다.",
+      "bridgeBurn()는 소유자 전용 함수(modifier onlyBridge)로, 승인(allowance) 절차 없이 임의 계정(from)의 balanceOf 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다."
+    ],
+    "evidence": [
+      {
+        "function": "bridgeMint",
+        "line": 12
+      },
+      {
+        "function": "bridgeBurn",
+        "line": 18
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U091.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "execute()의 외부 호출(call)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "execute()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "execute",
+        "line": 11
+      },
+      {
+        "function": "execute",
+        "line": 11
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U092.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 출금 제약(frozen)을 setFrozen()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U093.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "redeem()의 외부 호출(quote)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "redeem",
+        "line": 15
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U094.sol",
+    "verdict": "BENIGN",
+    "reasons": [
+      "지원하는 규칙과 함수 내 흐름 분석 범위에서 악성 근거 또는 추가 검토가 필요한 경로를 발견하지 못했습니다. 전체 계약의 안전성을 증명하는 판정은 아닙니다."
+    ],
+    "evidence": [],
+    "risk_level": "LOW",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U095.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "deploy()의 외부 호출(deposit)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다.",
+      "recall()의 외부 호출(withdraw)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "deploy",
+        "line": 19
+      },
+      {
+        "function": "recall",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  },
+  {
+    "file": "U096.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다.",
+      "fallback()는 관리자가 변경하는 구현 주소(implementation)로 위임하는 프록시입니다. 업그레이드 권한의 신뢰성과 외부 구현을 확인하지 못해 정상 업그레이드인지 백도어인지 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "line": 21
+      },
+      {
+        "function": "fallback",
+        "line": 23
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U097.sol",
+    "verdict": "MALICIOUS",
+    "reasons": [
+      "mint()는 modifier onlyIssuer 로 소유자 전용이며, 공급량을 증가시키기 전에 공급량 상한을 검사하지 않습니다. 소유자가 발행량을 무제한으로 늘려 보유자 지분을 희석할 수 있습니다."
+    ],
+    "evidence": [
+      {
+        "function": "mint",
+        "line": 14
+      }
+    ],
+    "risk_level": "CRITICAL",
+    "risk_type": "BACKDOOR"
+  },
+  {
+    "file": "U098.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "transfer()는 송신자와 수신자 모두에 관리자 변경 가능한 차단 정책(blocked)을 적용합니다. 정상적인 차단 정책인지 선택적 동결 악용인지 운영 근거 없이 확정할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "transfer",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U099.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "rescue()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다."
+    ],
+    "evidence": [
+      {
+        "function": "rescue",
+        "line": 16
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "CENTRALIZATION"
+  },
+  {
+    "file": "U100.sol",
+    "verdict": "UNCERTAIN",
+    "reasons": [
+      "withdraw()의 외부 호출(open)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다."
+    ],
+    "evidence": [
+      {
+        "function": "withdraw",
+        "line": 17
+      }
+    ],
+    "risk_level": "MEDIUM",
+    "risk_type": "NONE"
+  }
+]

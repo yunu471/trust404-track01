@@ -1,0 +1,477 @@
+{
+  "dataset": "gpt",
+  "label_source": "Filename B/M/U proxy only; not an authoritative answer key",
+  "analyzer_sha256": "f871e055ba3f13a403316b565d0771369a1acae7d25fdcafc9fbf2e1710940d8",
+  "exit_code": 0,
+  "elapsed_seconds": 4.528,
+  "total": 300,
+  "correct": 200,
+  "wrong": 31,
+  "uncertain": 69,
+  "net_score": 169,
+  "linear_normalized_10_assumption": 5.633333333333334,
+  "linear_converted_15_assumption": 8.450000000000001,
+  "coverage": 0.77,
+  "decided_accuracy": 0.8658008658008658,
+  "confusion_matrix": {
+    "BENIGN": {
+      "BENIGN": 100
+    },
+    "MALICIOUS": {
+      "MALICIOUS": 100
+    },
+    "UNCERTAIN": {
+      "MALICIOUS": 19,
+      "UNCERTAIN": 69,
+      "BENIGN": 12
+    }
+  },
+  "mismatches": [
+    {
+      "file": "U001.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U009.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U010.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U012.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U014.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U017.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U025.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U026.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U028.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U030.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U033.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U041.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U042.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U044.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U046.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U049.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U057.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U058.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U060.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U062.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U065.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U073.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U074.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U076.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U078.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U081.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U089.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U090.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    },
+    {
+      "file": "U092.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U094.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "BENIGN"
+    },
+    {
+      "file": "U097.sol",
+      "expected": "UNCERTAIN",
+      "predicted": "MALICIOUS"
+    }
+  ],
+  "abstentions": [
+    {
+      "file": "U002.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U003.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U004.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U005.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U006.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U007.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U008.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U011.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U013.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U015.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U016.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U018.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U019.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U020.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U021.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U022.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U023.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U024.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U027.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U029.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U031.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U032.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U034.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U035.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U036.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U037.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U038.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U039.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U040.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U043.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U045.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U047.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U048.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U050.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U051.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U052.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U053.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U054.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U055.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U056.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U059.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U061.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U063.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U064.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U066.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U067.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U068.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U069.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U070.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U071.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U072.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U075.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U077.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U079.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U080.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U082.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U083.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U084.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U085.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U086.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U087.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U088.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U091.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U093.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U095.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U096.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U098.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U099.sol",
+      "expected": "UNCERTAIN"
+    },
+    {
+      "file": "U100.sol",
+      "expected": "UNCERTAIN"
+    }
+  ],
+  "validation": {
+    "method": "standard-library schema core checks, not full Draft 2020-12",
+    "errors": [],
+    "missing": [],
+    "duplicates": [],
+    "extras": [],
+    "line_errors": [],
+    "empty_reasons": 0,
+    "empty_evidence": 0,
+    "detector_failures": 0
+  },
+  "reason_validity_score": null,
+  "reason_validity_note": "Requires manual code/reason review; evidence presence does not imply 2 points."
+}
