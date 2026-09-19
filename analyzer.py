@@ -321,30 +321,76 @@ def detect_uncapped_mint(contract: Contract, func: Func, owner_vars, newline_off
     privileged, priv_evidence = function_is_privileged(func, contract, owner_vars)
 
     # 상한 검사 탐색: totalSupply 증가 이전 구간에서 cap성 변수/식별자와의 비교(require/if)를 찾는다
-    first_inc_idx = inc_matches[0].start()
+    first_inc = inc_matches[0]
+    first_inc_idx = first_inc.start()
     pre_segment = body[:first_inc_idx]
     capped = False
     cap_evidence = None
-    # 명명된 cap 변수 사용 (상태변수 혹은 하드코딩 상수 모두 포함)
+    checked_amount_var = None
+    cap_var = None
     for cond_m in re.finditer(r"(require|if)\s*\(([^;{]*(?:<=|<)[^;{]*)\)", pre_segment):
         cond = cond_m.group(2)
         if "totalSupply" in cond or "amount" in cond or "supply" in cond.lower():
             if CAP_NAME_RE.search(cond) or re.search(r"<=?\s*\d", cond):
                 capped = True
                 cap_evidence = cond.strip()
+                am_m = re.search(r"totalSupply\s*\+\s*(\w+)", cond)
+                if am_m:
+                    checked_amount_var = am_m.group(1)
+                cap_ids = re.findall(r"<=?\s*([A-Za-z_]\w*)", cond)
+                if cap_ids:
+                    cap_var = cap_ids[-1]
                 break
+    line = find_line(contract, func.body_start_idx + first_inc_idx, newline_offsets)
+
     if capped:
+        # (a) 실제 증가량이 검사한 변수와 일치하는지 확인 ("가짜 상한" - 검사와 효과의 불일치)
+        rhs_end = body.find(";", first_inc.end())
+        rhs_text = body[first_inc.end():rhs_end].strip() if rhs_end != -1 else ""
+        rhs_norm = re.sub(r"[\s()]+", "", rhs_text)
+        if checked_amount_var and rhs_text and rhs_norm != checked_amount_var:
+            out.append({
+                "malicious": True,
+                "function": func.name,
+                "line": line,
+                "reason": "%s()는 상한 검사에서 %s 값을 검사하지만, 실제로 totalSupply에 더하는 값은 '%s'로 서로 일치하지 않습니다. 검사는 통과하면서 실제 발행량은 검사되지 않은 만큼 늘어날 수 있어 상한이 무력화됩니다." % (func.name, checked_amount_var, rhs_text),
+                "risk_level": "CRITICAL",
+                "risk_type": "BACKDOOR",
+            })
+            return
+
+        # (b) 상한 변수 자체가 소유자가 자유롭게 올릴 수 있는 가변값인지 확인 ("가변 상한" 우회)
+        if cap_var and not cap_var.isdigit():
+            cap_type = None
+            for typ, vn, init in contract.state_vars:
+                if vn == cap_var:
+                    cap_type = typ
+                    break
+            is_fixed = cap_type is not None and ("constant" in cap_type or "immutable" in cap_type)
+            if cap_type is not None and not is_fixed:
+                setter, setter_ev = find_setter_privilege(contract, cap_var, owner_vars)
+                if setter is not None:
+                    bound_re = re.search(r"(require|if)\s*\([^;{]*(<=|<)[^;{]*\)", setter.body)
+                    if bound_re is None:
+                        out.append({
+                            "malicious": True,
+                            "function": func.name,
+                            "line": line,
+                            "reason": "%s()의 상한(%s)은 상수가 아니라 %s()에서 소유자가 별도 상한 검증 없이 자유롭게 올릴 수 있는 변수입니다. 상한을 먼저 올린 뒤 발행하면 사실상 무제한 발행과 동일합니다." % (func.name, cap_var, setter.name),
+                            "risk_level": "CRITICAL",
+                            "risk_type": "BACKDOOR",
+                        })
+                        return
         out.append({
             "malicious": False,
             "function": func.name,
-            "line": find_line(contract, func.body_start_idx + first_inc_idx, newline_offsets),
+            "line": line,
             "reason": "%s()는 발행 전 공급량 상한을 코드로 강제합니다 (%s). 상한 내 희석은 위험으로 부기하되 verdict는 BENIGN입니다." % (func.name, cap_evidence),
             "risk_level": "LOW",
             "risk_type": "CENTRALIZATION",
         })
         return
 
-    line = find_line(contract, func.body_start_idx + first_inc_idx, newline_offsets)
     if privileged:
         out.append({
             "malicious": True,
@@ -387,36 +433,52 @@ def detect_transfer_asymmetry(contract: Contract, func: Func, owner_vars, newlin
     mapping_gate_names = {n for t, n, i in contract.state_vars if t.startswith("mapping") and GATE_MAPPING_NAME_RE.search(n)}
     global_flag_names = {n for t, n, i in contract.state_vars if (t == "bool") and GLOBAL_FLAG_NAME_RE.search(n)}
 
-    for gm in re.finditer(r"require\s*\(\s*(!?)\s*(\w+)\s*(\[\s*(msg\.sender|from|sender)\s*\])?\s*[,)]", body):
-        neg, varname, has_index, idxname = gm.group(1), gm.group(2), gm.group(3), gm.group(4)
-        line = find_line(contract, func.body_start_idx + gm.start(), newline_offsets)
-        if varname in mapping_gate_names and has_index:
-            setter, setter_ev = find_setter_privilege(contract, varname, owner_vars)
-            if setter is not None:
-                out.append({
-                    "malicious": True,
-                    "function": func.name,
-                    "line": line,
-                    "reason": "%s()는 %s[%s] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 %s()에서 소유자만 변경할 수 있습니다(%s). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다." % (func.name, varname, idxname, setter.name, setter_ev),
-                    "risk_level": "CRITICAL",
-                    "risk_type": "BACKDOOR",
-                })
-            continue
-        if varname in global_flag_names and not has_index:
-            # 소유자를 조건식에서 명시적으로 예외처리하는지 확인 (같은 require 문 내부 또는 직전 5줄)
-            window = body[max(0, gm.start() - 200):gm.start() + 200]
+    # require(...) / if(...) 의 조건식 전체를 뽑아서 && / || 로 여러 항이 묶인 복합 조건도 인식한다
+    seen_lines = set()
+    for cm in re.finditer(r"(require|if)\s*\(([^)]*)\)", body):
+        cond = cm.group(2)
+        line = find_line(contract, func.body_start_idx + cm.start(), newline_offsets)
+
+        for gate_name in mapping_gate_names:
+            idx_m = re.search(re.escape(gate_name) + r"\s*\[\s*(msg\.sender|from|sender)\s*\]", cond)
+            if not idx_m:
+                continue
+            setter, setter_ev = find_setter_privilege(contract, gate_name, owner_vars)
+            if setter is None:
+                continue
+            key = (line, gate_name)
+            if key in seen_lines:
+                continue
+            seen_lines.add(key)
+            out.append({
+                "malicious": True,
+                "function": func.name,
+                "line": line,
+                "reason": "%s()는 %s[%s] 값을 근거로 전송 가능 여부를 결정하며, 이 값은 %s()에서 소유자만 변경할 수 있습니다(%s). 소유자가 임의로 보유자의 전송 가능 여부를 결정하는 비대칭 구조입니다." % (func.name, gate_name, idx_m.group(1), setter.name, setter_ev),
+                "risk_level": "CRITICAL",
+                "risk_type": "BACKDOOR",
+            })
+
+        for flag_name in global_flag_names:
+            if not re.search(r"\b" + re.escape(flag_name) + r"\b", cond):
+                continue
+            if re.search(re.escape(flag_name) + r"\s*\[", cond):
+                continue  # 매핑 변수와 이름이 겹치는 경우 방지
             exempts_owner = False
             for ov in owner_vars:
-                if re.search(r"msg\.sender\s*(==|!=)\s*" + re.escape(ov), window) or \
-                   re.search(re.escape(ov) + r"\s*(==|!=)\s*msg\.sender", window):
+                if re.search(r"msg\.sender\s*(==|!=)\s*" + re.escape(ov) + r"\b", cond):
                     exempts_owner = True
                     break
+            key = (line, flag_name)
+            if key in seen_lines:
+                continue
+            seen_lines.add(key)
             if exempts_owner:
                 out.append({
                     "malicious": True,
                     "function": func.name,
                     "line": line,
-                    "reason": "%s()의 전송 제한(%s)이 소유자에게는 예외적으로 적용되지 않아, 소유자만 팔 수 있고 일반 보유자는 팔 수 없는 비대칭 구조입니다." % (func.name, varname),
+                    "reason": "%s()의 전송 제한(%s)이 소유자에게는 예외적으로 적용되지 않아, 소유자만 팔 수 있고 일반 보유자는 팔 수 없는 비대칭 구조입니다." % (func.name, flag_name),
                     "risk_level": "CRITICAL",
                     "risk_type": "BACKDOOR",
                 })
@@ -425,21 +487,173 @@ def detect_transfer_asymmetry(contract: Contract, func: Func, owner_vars, newlin
                     "malicious": False,
                     "function": func.name,
                     "line": line,
-                    "reason": "%s()의 전송 제한(%s)은 소유자를 포함해 모든 주소에 동일하게 적용되는 대칭적 가용성 제약이므로 자산이 남의 손으로 넘어가는 경로가 아닙니다. 다만 소유자가 이 플래그를 제어한다면 중앙화 위험으로 부기합니다." % (func.name, varname),
+                    "reason": "%s()의 전송 제한(%s)은 소유자를 포함해 모든 주소에 동일하게 적용되는 대칭적 가용성 제약이므로 자산이 남의 손으로 넘어가는 경로가 아닙니다. 다만 소유자가 이 플래그를 제어한다면 중앙화 위험으로 부기합니다." % (func.name, flag_name),
                     "risk_level": "LOW",
                     "risk_type": "CENTRALIZATION",
                 })
 
 
+def detect_owner_exemption(contract: Contract, func: Func, owner_vars, newline_offsets, out):
+    """함수 이름/변수 이름에 의존하지 않고, '소유자만 예외' 패턴 자체를 코드 구조로 잡는다.
+    예: if (msg.sender != owner) { require(...); ... }  또는 require(cond || msg.sender == owner)
+    다른 사람에게는 적용되는 검사/차감을 소유자만 비켜가는 함수는 그 자체로 비대칭 권한이다."""
+    if func.name in ("constructor",):
+        return
+    body = func.body
+    exempt = None  # (owner_var, position)
+
+    for m in re.finditer(r"if\s*\(([^)]*)\)", body):
+        cond = m.group(1)
+        for ov in owner_vars:
+            if re.search(r"msg\.sender\s*!=\s*" + re.escape(ov) + r"\b", cond):
+                exempt = (ov, m.start())
+                break
+        if exempt:
+            break
+    if not exempt:
+        for m in re.finditer(r"require\s*\(([^)]*)\)", body):
+            cond = m.group(1)
+            for ov in owner_vars:
+                if re.search(r"\|\|\s*msg\.sender\s*==\s*" + re.escape(ov) + r"\b", cond) or \
+                   re.search(r"msg\.sender\s*==\s*" + re.escape(ov) + r"\s*\|\|", cond):
+                    exempt = (ov, m.start())
+                    break
+            if exempt:
+                break
+    if not exempt:
+        return
+
+    # 오탐 방지: 이 함수가 실제로 자산(잔고/승인/전송가능여부) 관련 매핑을 건드릴 때만 보고한다
+    if not re.search(r"\[\s*(msg\.sender|from|to|\w+)\s*\]\s*(\+=|-=|=(?!=))", body):
+        return
+
+    ov, pos = exempt
+    line = find_line(contract, func.body_start_idx + pos, newline_offsets)
+    out.append({
+        "malicious": True,
+        "function": func.name,
+        "line": line,
+        "reason": "%s()는 소유자(%s)만 예외로 두는 조건(다른 사용자에게는 적용되는 검사를 소유자는 건너뜀)이 있습니다. 소유자와 일반 사용자에게 서로 다른 규칙이 적용되는 비대칭 권한 구조입니다." % (func.name, ov),
+        "risk_level": "CRITICAL",
+        "risk_type": "BACKDOOR",
+    })
+
+
+BALANCE_LIKE_NAME_RE = re.compile(r"balance", re.IGNORECASE)
+
+
+def get_address_params(contract: Contract, func: Func):
+    try:
+        params_text = func_params_text(contract, func)
+    except Exception:
+        return []
+    names = []
+    for p in split_top_params(params_text):
+        m = re.search(r"\baddress\b(?:\s+payable)?\s+(\w+)\s*$", p.strip())
+        if m:
+            names.append(m.group(1))
+    return names
+
+
+def detect_privileged_balance_mutation(contract: Contract, func: Func, owner_vars, newline_offsets, out):
+    """seize()/maintenance()/ownerBurn() 류: 승인 절차 없이 임의 계정의 잔고를 직접
+    덮어쓰거나 차감하는 특권 함수. mint/transfer/transferFrom 계열과는 별도 경로다."""
+    if func.name in TRANSFER_FUNC_NAMES or func.name == "constructor":
+        return
+    addr_params = [p for p in get_address_params(contract, func) if p != "msg.sender"]
+    if not addr_params:
+        return
+    balance_vars = [n for t, n, i in contract.state_vars if t.startswith("mapping") and BALANCE_LIKE_NAME_RE.search(n)]
+    if not balance_vars:
+        return
+    body = func.body
+    privileged, priv_ev = function_is_privileged(func, contract, owner_vars)
+
+    for bv in balance_vars:
+        for p in addr_params:
+            # transferFrom 류처럼 allowance 검증을 동반하면 정상적인 대리 이체이므로 제외
+            if re.search(r"allowance\s*\[\s*" + re.escape(p) + r"\s*\]", body):
+                continue
+            m = re.search(re.escape(bv) + r"\s*\[\s*" + re.escape(p) + r"\s*\]\s*(=(?!=)|-=)", body)
+            if not m:
+                continue
+            line = find_line(contract, func.body_start_idx + m.start(), newline_offsets)
+            who = ("소유자 전용 함수(%s)" % priv_ev) if privileged else "권한 제한이 없는 함수"
+            out.append({
+                "malicious": True,
+                "function": func.name,
+                "line": line,
+                "reason": "%s()는 %s로, 승인(allowance) 절차 없이 임의 계정(%s)의 %s 값을 직접 덮어쓰거나 차감합니다. 보유자 동의 없이 잔고를 몰수하거나 조작할 수 있는 경로입니다." % (func.name, who, p, bv),
+                "risk_level": "CRITICAL",
+                "risk_type": "BACKDOOR" if privileged else "VULNERABILITY",
+            })
+            return
+
+
+FEE_NAME_RE = re.compile(r"(fee|tax)", re.IGNORECASE)
+
+
+def detect_fee_siphon(contract: Contract, func: Func, owner_vars, newline_offsets, out):
+    """transfer() 안에서 전송액의 일부를 owner 잔고로 떼어가는 수수료 로직 중,
+    그 수수료율을 owner가 상한 없이(또는 사실상 100%까지) 올릴 수 있는 경우를 잡는다."""
+    if func.name not in TRANSFER_FUNC_NAMES:
+        return
+    body = func.body
+    for ov in owner_vars:
+        credit_m = re.search(r"\[\s*" + re.escape(ov) + r"\s*\]\s*\+=\s*(\w+)\s*;", body)
+        if not credit_m:
+            continue
+        fee_var = credit_m.group(1)
+        assign_m = re.search(r"\b" + re.escape(fee_var) + r"\s*=\s*([^;]+);", body[:credit_m.start()])
+        if not assign_m:
+            continue
+        expr = assign_m.group(1)
+        rate_m = FEE_NAME_RE.search(expr)
+        denom_m = re.search(r"/\s*(\d+)", expr)
+        if not rate_m or not denom_m:
+            continue
+        rate_var_m = re.search(r"\b(\w*(?:[Ff]ee|[Tt]ax)\w*)\b", expr)
+        if not rate_var_m:
+            continue
+        rate_var = rate_var_m.group(1)
+        denom = int(denom_m.group(1))
+        setter, setter_ev = find_setter_privilege(contract, rate_var, owner_vars)
+        line = find_line(contract, func.body_start_idx + credit_m.start(), newline_offsets)
+        if setter is None:
+            continue
+        bound_m = re.search(re.escape(rate_var) + r"[^;]*<=\s*(\d+)", setter.body) or \
+                  re.search(r"<=\s*(\d+)[^;]*" + re.escape(rate_var), setter.body)
+        if bound_m:
+            max_rate = int(bound_m.group(1))
+            ratio = max_rate / denom if denom else 1.0
+        else:
+            ratio = 1.0  # 상한 검증 자체가 없으면 사실상 무제한으로 취급
+        if ratio >= 0.3:
+            out.append({
+                "malicious": True,
+                "function": func.name,
+                "line": line,
+                "reason": "%s()는 전송액 중 일부를 소유자(%s) 잔고로 적립하는데, 그 비율(%s)을 소유자가 %s()에서 최대 %.0f%% 까지 설정할 수 있습니다. 소유자가 전송 가치의 상당 부분(또는 전부)을 수수료로 가져갈 수 있습니다." % (func.name, ov, rate_var, setter.name, ratio * 100),
+                "risk_level": "CRITICAL",
+                "risk_type": "BACKDOOR",
+            })
+        return
+
+
 DELEGATECALL_RE = re.compile(r"(\w+(?:\.\w+)*)\s*\.\s*delegatecall\s*\(")
+ASM_DELEGATECALL_RE = re.compile(r"(?<!\.)\bdelegatecall\s*\(\s*(?:gas\s*\(\s*\)|[^,()]+)\s*,\s*(\w+)")
 
 
 def detect_delegatecall(contract: Contract, func: Func, owner_vars, newline_offsets, out):
     body = func.body
+    calls = []  # (start_idx, target_var, target_expr)
     for dm in DELEGATECALL_RE.finditer(body):
-        target_expr = dm.group(1)
-        line = find_line(contract, func.body_start_idx + dm.start(), newline_offsets)
-        target_var = target_expr.split(".")[0]
+        calls.append((dm.start(), dm.group(1).split(".")[0], dm.group(1)))
+    for am in ASM_DELEGATECALL_RE.finditer(body):
+        calls.append((am.start(), am.group(1), am.group(1) + " (assembly)"))
+
+    for start_idx, target_var, target_expr in calls:
+        line = find_line(contract, func.body_start_idx + start_idx, newline_offsets)
 
         is_fixed_immutable = False
         for typ, varname, init in contract.state_vars:
@@ -561,6 +775,97 @@ def detect_fund_drain(contract: Contract, func: Func, owner_vars, newline_offset
                 })
 
 
+ALLOWANCE_MAPPING_RE = re.compile(r"\b(\w*[Aa]llowance\w*)\s*\[\s*from\s*\]\s*\[\s*msg\.sender\s*\]")
+
+
+def detect_allowance_bypass(contract: Contract, func: Func, owner_vars, newline_offsets, out):
+    if func.name != "transferFrom":
+        return
+    body = func.body
+    am = ALLOWANCE_MAPPING_RE.search(body)
+    if not am:
+        # allowance 흔적 자체가 없음 -> 승인 없이 임의 계정의 잔고를 옮길 수 있는지 확인
+        if re.search(r"\bfrom\b", body) and re.search(r"\[\s*from\s*\]\s*-=", body):
+            out.append({
+                "malicious": True,
+                "function": func.name,
+                "line": find_line(contract, func.body_start_idx, newline_offsets),
+                "reason": "%s()는 allowance(승인) 검사 없이 임의 계정(from)의 잔고를 이동시킵니다. 소유자 동의 없이 누구나 타인의 잔고를 전송할 수 있습니다." % func.name,
+                "risk_level": "CRITICAL",
+                "risk_type": "VULNERABILITY",
+            })
+        return
+    expr = am.group(0)
+    has_check = bool(re.search(r"require\s*\(\s*" + re.escape(expr), body))
+    has_decrement = bool(re.search(re.escape(expr) + r"\s*(-=|=\s*" + re.escape(expr) + r"\s*-)", body))
+    line = find_line(contract, func.body_start_idx + am.start(), newline_offsets)
+    if not has_check:
+        out.append({
+            "malicious": True,
+            "function": func.name,
+            "line": line,
+            "reason": "%s()는 %s 값을 확인하지 않고 잔고를 이동시켜, 승인 한도와 무관하게 임의 금액을 전송할 수 있습니다." % (func.name, expr),
+            "risk_level": "CRITICAL",
+            "risk_type": "VULNERABILITY",
+        })
+    elif not has_decrement:
+        out.append({
+            "malicious": True,
+            "function": func.name,
+            "line": line,
+            "reason": "%s()는 %s 값을 검사만 하고 실제로 차감하지 않습니다. 같은 승인 한도로 여러 번 반복 호출해 승인 금액보다 훨씬 많은 금액을 누적 전송할 수 있습니다." % (func.name, expr),
+            "risk_level": "CRITICAL",
+            "risk_type": "VULNERABILITY",
+        })
+
+
+EXTERNAL_SEND_RE = re.compile(r"\.\s*call\s*\{\s*value\s*:|\.\s*transfer\s*\(|\.\s*send\s*\(")
+
+
+def detect_reentrancy(contract: Contract, func: Func, owner_vars, newline_offsets, out):
+    body = func.body
+    send_m = EXTERNAL_SEND_RE.search(body)
+    if not send_m:
+        return
+    # msg.sender 를 키로 하는 매핑에 대한 require 검사가 이 함수 안에 있는지 확인 (인출류 함수 식별)
+    check_m = re.search(r"require\s*\(\s*(\w+)\s*\[\s*msg\.sender\s*\]\s*>=", body)
+    if not check_m:
+        return
+    mapping_var = check_m.group(1)
+    decrement_pat = re.compile(re.escape(mapping_var) + r"\s*\[\s*msg\.sender\s*\]\s*(-=|=\s*" + re.escape(mapping_var) + r"\s*\[\s*msg\.sender\s*\]\s*-)")
+    dec_matches = list(decrement_pat.finditer(body))
+    line = find_line(contract, func.body_start_idx + send_m.start(), newline_offsets)
+    if not dec_matches:
+        out.append({
+            "malicious": True,
+            "function": func.name,
+            "line": line,
+            "reason": "%s()는 %s[msg.sender] 검사 후 외부 전송을 실행하지만, 해당 잔고를 차감하는 코드가 없습니다. 같은 잔고로 반복 인출이 가능합니다." % (func.name, mapping_var),
+            "risk_level": "CRITICAL",
+            "risk_type": "VULNERABILITY",
+        })
+        return
+    first_dec_idx = dec_matches[0].start()
+    if send_m.start() < first_dec_idx:
+        out.append({
+            "malicious": True,
+            "function": func.name,
+            "line": line,
+            "reason": "%s()는 %s[msg.sender] 잔고를 차감(effects)하기 전에 외부 주소로 값을 전송(interaction)합니다. 재진입 공격으로 잔고 차감 이전에 인출 함수를 반복 호출해 자산을 초과 인출할 수 있습니다 (checks-effects-interactions 위반)." % (func.name, mapping_var),
+            "risk_level": "CRITICAL",
+            "risk_type": "VULNERABILITY",
+        })
+    else:
+        out.append({
+            "malicious": False,
+            "function": func.name,
+            "line": line,
+            "reason": "%s()는 외부 전송 전에 %s[msg.sender] 잔고를 먼저 차감해(checks-effects-interactions 준수) 재진입 공격 경로가 막혀 있습니다." % (func.name, mapping_var),
+            "risk_level": "LOW",
+            "risk_type": "NONE",
+        })
+
+
 # --------------------------------------------------------------------------
 # 5. 파일 단위 분석 -> finding 객체 생성
 # --------------------------------------------------------------------------
@@ -608,6 +913,11 @@ def analyze_file(path: str):
                 detect_transfer_asymmetry(c, func, owner_vars, newline_offsets, all_findings)
                 detect_delegatecall(c, func, owner_vars, newline_offsets, all_findings)
                 detect_fund_drain(c, func, owner_vars, newline_offsets, all_findings)
+                detect_allowance_bypass(c, func, owner_vars, newline_offsets, all_findings)
+                detect_reentrancy(c, func, owner_vars, newline_offsets, all_findings)
+                detect_owner_exemption(c, func, owner_vars, newline_offsets, all_findings)
+                detect_privileged_balance_mutation(c, func, owner_vars, newline_offsets, all_findings)
+                detect_fee_siphon(c, func, owner_vars, newline_offsets, all_findings)
             except Exception:
                 # 개별 탐지 실패는 무시하고 계속 진행 (해당 파일 전체를 죽이지 않음)
                 continue
