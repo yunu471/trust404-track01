@@ -142,7 +142,7 @@ python3 validate_schema.py out.json ./challenge_public
 ## 독립 제작 40케이스 검증 (1차, GPT로 생성한 practice dataset)
 
 저희가 만들지 않은, 별도로 GPT에게 생성을 요청한 30개 신규 샘플(`gpt_dataset/` — BENIGN 10 ·
-MALICIOUS 10 · UNCERTAIN 10, 정답 라벨은 `gpt_dataset/manifest.json`)로 교차 검증했습니다.
+MALICIOUS 10 · UNCERTAIN 10, 정답 라벨은 `datasets_legacy/gpt_30/manifest.json`)로 교차 검증했습니다.
 
 | 구간 | 결과 |
 |---|---|
