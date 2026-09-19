@@ -1,0 +1,14 @@
+{
+  "name": "TRUST404 Solidity Evaluation Corpus 300",
+  "seed": 404300,
+  "solidity": "^0.8.20",
+  "cases": 300,
+  "families": 24,
+  "distribution": {
+    "BENIGN": 120,
+    "MALICIOUS": 120,
+    "UNCERTAIN": 60
+  },
+  "label_leakage_policy": "No verdict or family name in case filename, contract name, or source comments.",
+  "provenance": "Synthetic minimal reproductions inspired by public taxonomies and disclosed bug classes; no production exploit code copied."
+}

@@ -91,6 +91,8 @@ def strip_comments_and_strings(src: str) -> str:
             continue
         out.append(c)
         i += 1
+    if in_block_comment or in_string:
+        raise ValueError("닫히지 않은 주석 또는 문자열")
     return "".join(out)
 
 
@@ -304,7 +306,7 @@ def find_line(contract: Contract, local_idx: int, newline_offsets) -> int:
 # --------------------------------------------------------------------------
 # 4. 탐지 규칙 (Detectors)
 #    각 함수는 findings 리스트에 dict 를 추가한다:
-#    {verdict_hint: "MALICIOUS"|"BENIGN_NOTE", function, line, reason, risk_level, risk_type}
+#    {malicious: bool, uncertain: bool (optional), function, line, reason, ...}
 # --------------------------------------------------------------------------
 CAP_NAME_RE = re.compile(r"(max[_a-z]*supply|supply[_a-z]*cap|hard[_ ]?cap|\bcap\b|mint[_a-z]*limit|_?cap_?)", re.IGNORECASE)
 SUPPLY_INCREASE_RE = re.compile(r"\btotalSupply\s*(\+=|=\s*totalSupply\s*\+)")
@@ -430,7 +432,10 @@ def detect_transfer_asymmetry(contract: Contract, func: Func, owner_vars, newlin
         return
     body = func.body
     # per-address mapping gate: mapping(address=>bool) 변수를 msg.sender/from 인덱스로 검사
-    mapping_gate_names = {n for t, n, i in contract.state_vars if t.startswith("mapping") and GATE_MAPPING_NAME_RE.search(n)}
+    # 이름(whitelist/blacklist/...)에 의존하지 않고, mapping(address => bool) 형태의
+    # per-address bool 매핑은 전부 게이트 후보로 본다. 실제 악성 여부는 "owner만 바꿀 수
+    # 있는가"(find_setter_privilege)로 걸러지므로 이름 의존을 없애도 오탐 위험이 낮다.
+    mapping_gate_names = {n for t, n, i in contract.state_vars if t.startswith("mapping") and "bool" in t}
     global_flag_names = {n for t, n, i in contract.state_vars if (t == "bool") and GLOBAL_FLAG_NAME_RE.search(n)}
 
     # require(...) / if(...) 의 조건식 전체를 뽑아서 && / || 로 여러 항이 묶인 복합 조건도 인식한다
@@ -450,6 +455,23 @@ def detect_transfer_asymmetry(contract: Contract, func: Func, owner_vars, newlin
             if key in seen_lines:
                 continue
             seen_lines.add(key)
+            # 기본 허용 + 송신자/수신자 모두에 같은 deny 정책을 적용하는 경우,
+            # 규제 정책인지 선택적 동결 악용인지 소스만으로 확정하지 않는다.
+            addresses = get_address_params(contract, func)
+            terms = [r"!\s*" + re.escape(gate_name) + r"\s*\[\s*" + re.escape(addr) + r"\s*\]"
+                     for addr in addresses]
+            sender_term = r"!\s*" + re.escape(gate_name) + r"\s*\[\s*msg\.sender\s*\]"
+            bilateral_deny = cm.group(1) == "require" and any(
+                re.fullmatch(r"\s*(?:" + sender_term + r"\s*&&\s*" + term +
+                             r"|" + term + r"\s*&&\s*" + sender_term + r")\s*(?:,\s*)?", cond)
+                for term in terms)
+            if bilateral_deny:
+                finding = uncertainty_finding(
+                    "%s()는 송신자와 수신자 모두에 관리자 변경 가능한 차단 정책(%s)을 적용합니다. 정상적인 차단 정책인지 선택적 동결 악용인지 운영 근거 없이 확정할 수 없습니다." % (func.name, gate_name),
+                    line, func.name)
+                finding["risk_type"] = "CENTRALIZATION"
+                out.append(finding)
+                continue
             out.append({
                 "malicious": True,
                 "function": func.name,
@@ -572,7 +594,7 @@ def detect_privileged_balance_mutation(contract: Contract, func: Func, owner_var
     for bv in balance_vars:
         for p in addr_params:
             # transferFrom 류처럼 allowance 검증을 동반하면 정상적인 대리 이체이므로 제외
-            if re.search(r"allowance\s*\[\s*" + re.escape(p) + r"\s*\]", body):
+            if re.search(r"(?i)\w*allow\w*\s*\[\s*" + re.escape(p) + r"\s*\]", body):
                 continue
             m = re.search(re.escape(bv) + r"\s*\[\s*" + re.escape(p) + r"\s*\]\s*(=(?!=)|-=)", body)
             if not m:
@@ -619,8 +641,31 @@ def detect_fee_siphon(contract: Contract, func: Func, owner_vars, newline_offset
         denom = int(denom_m.group(1))
         setter, setter_ev = find_setter_privilege(contract, rate_var, owner_vars)
         line = find_line(contract, func.body_start_idx + credit_m.start(), newline_offsets)
+
         if setter is None:
-            continue
+            # 세터가 없다면 -- 애초에 생성 시점 초기값 자체가 이미 높을 수 있다 (세터가
+            # 없다고 안전한 게 아니라, 처음부터 고정된 고율 수수료일 수 있다)
+            init_val = None
+            for typ, vn, init in contract.state_vars:
+                if vn == rate_var and init:
+                    num_m = re.search(r"(\d+)", init)
+                    if num_m:
+                        init_val = int(num_m.group(1))
+                    break
+            if init_val is None:
+                continue
+            ratio = init_val / denom if denom else 1.0
+            if ratio >= 0.3:
+                out.append({
+                    "malicious": True,
+                    "function": func.name,
+                    "line": line,
+                    "reason": "%s()는 전송액 중 일부를 소유자(%s) 잔고로 적립하는데, 그 비율(%s)이 세터 없이 생성 시점부터 %.0f%% 로 고정되어 있습니다. 세터가 없다는 것이 안전을 뜻하지 않으며, 이미 처음부터 전송 가치의 상당 부분을 소유자가 가져가는 구조입니다." % (func.name, ov, rate_var, ratio * 100),
+                    "risk_level": "CRITICAL",
+                    "risk_type": "BACKDOOR",
+                })
+            return
+
         bound_m = re.search(re.escape(rate_var) + r"[^;]*<=\s*(\d+)", setter.body) or \
                   re.search(r"<=\s*(\d+)[^;]*" + re.escape(rate_var), setter.body)
         if bound_m:
@@ -655,6 +700,25 @@ def detect_delegatecall(contract: Contract, func: Func, owner_vars, newline_offs
     for start_idx, target_var, target_expr in calls:
         line = find_line(contract, func.body_start_idx + start_idx, newline_offsets)
 
+        # fallback의 상태변수 기반 프록시와 호출자가 매번 대상을 전달하는
+        # 실행기를 구분한다. 저장소 회계가 있거나 비특권 변경 경로가 있으면 제외.
+        resolved_target = target_var
+        alias = re.search(r"\baddress\s+" + re.escape(target_var) + r"\s*=\s*(\w+)\s*;", body[:start_idx])
+        if alias:
+            resolved_target = alias.group(1)
+        address_state = any(t.startswith("address") and n == resolved_target for t, n, _ in contract.state_vars)
+        writers = [f for f in contract.functions if re.search(
+            r"\b" + re.escape(resolved_target) + r"\s*=(?!=)", f.body)]
+        if (func.name == "fallback" and address_state and writers
+                and not any(t.startswith("mapping") for t, _, _ in contract.state_vars)
+                and all(function_is_privileged(f, contract, owner_vars)[0] for f in writers)):
+            finding = uncertainty_finding(
+                "%s()는 관리자가 변경하는 구현 주소(%s)로 위임하는 프록시입니다. 업그레이드 권한의 신뢰성과 외부 구현을 확인하지 못해 정상 업그레이드인지 백도어인지 확정할 수 없습니다." % (func.name, resolved_target),
+                line, func.name)
+            finding["risk_type"] = "CENTRALIZATION"
+            out.append(finding)
+            continue
+
         is_fixed_immutable = False
         for typ, varname, init in contract.state_vars:
             if varname == target_var and "immutable" in typ_immutable_check(contract, varname):
@@ -667,9 +731,10 @@ def detect_delegatecall(contract: Contract, func: Func, owner_vars, newline_offs
         if is_fixed_immutable and not is_param:
             out.append({
                 "malicious": False,
+                "uncertain": True,
                 "function": func.name,
                 "line": line,
-                "reason": "%s()의 delegatecall 대상(%s)은 생성자에서 한 번만 고정되고 세터가 없어 임의 대상으로 변경할 수 없습니다 (프록시 패턴). 다만 구현 계약 자체의 정직성에는 의존합니다." % (func.name, target_expr),
+                "reason": "%s()의 delegatecall 대상(%s)은 고정되어 있지만, 실행되는 외부 구현을 확인할 수 없어 안전성을 확정할 수 없습니다." % (func.name, target_expr),
                 "risk_level": "MEDIUM",
                 "risk_type": "CENTRALIZATION",
             })
@@ -775,6 +840,38 @@ def detect_fund_drain(contract: Contract, func: Func, owner_vars, newline_offset
                 })
 
 
+ARBITRARY_CALL_RE = re.compile(r"(\w+)\s*\.\s*call\s*\{\s*value\s*:\s*(\w+)\s*\}\s*\(")
+
+
+def detect_arbitrary_call_drain(contract: Contract, func: Func, owner_vars, newline_offsets, out):
+    """execute()/route() 류: 임의 대상(target)에 임의 금액(value 파라미터)으로 저수준 call을
+    실행하는 특권 함수. 컨트랙트에 사용자 예치 장부가 있으면, address(this).balance 라는
+    리터럴을 안 써도 예치금을 임의 주소로 빼돌리는 경로가 된다."""
+    body = func.body
+    custodial_var = find_custodial_mapping(contract)
+    if not custodial_var:
+        return
+    addr_params = set(get_address_params(contract, func))
+    for m in ARBITRARY_CALL_RE.finditer(body):
+        target_var, value_var = m.group(1), m.group(2)
+        if target_var not in addr_params:
+            continue  # 대상이 고정 주소면 이 규칙 대상이 아님 (다른 규칙에서 처리)
+        if value_var == "0":
+            continue
+        privileged, priv_ev = function_is_privileged(func, contract, owner_vars)
+        if not privileged:
+            continue  # 권한 없는 함수는 더 심각하지만, 이 규칙은 "특권 우회 인출"에 집중
+        line = find_line(contract, func.body_start_idx + m.start(), newline_offsets)
+        out.append({
+            "malicious": True,
+            "function": func.name,
+            "line": line,
+            "reason": "%s()는 %s로, 함수 인자로 받은 임의 대상(%s)에 임의 금액(%s)을 저수준 call로 전송할 수 있습니다. 이 컨트랙트에는 사용자 예치 기록(%s)이 있어, address(this).balance를 직접 쓰지 않아도 예치금을 임의 주소로 우회 인출할 수 있는 경로입니다." % (func.name, priv_ev, target_var, value_var, custodial_var),
+            "risk_level": "CRITICAL",
+            "risk_type": "BACKDOOR",
+        })
+
+
 ALLOWANCE_MAPPING_RE = re.compile(r"\b(\w*[Aa]llowance\w*)\s*\[\s*from\s*\]\s*\[\s*msg\.sender\s*\]")
 
 
@@ -869,6 +966,97 @@ def detect_reentrancy(contract: Contract, func: Func, owner_vars, newline_offset
 # --------------------------------------------------------------------------
 # 5. 파일 단위 분석 -> finding 객체 생성
 # --------------------------------------------------------------------------
+def validate_delimiters(stripped):
+    """경량 파서가 잘린 소스를 정상 계약으로 취급하지 않도록 확인한다."""
+    stack = []
+    pairs = {"}": "{", ")": "(", "]": "["}
+    for ch in stripped:
+        if ch in "{([":
+            stack.append(ch)
+        elif ch in pairs:
+            if not stack or stack.pop() != pairs[ch]:
+                raise ValueError("괄호가 올바르게 짝지어지지 않았습니다")
+    if stack:
+        raise ValueError("닫히지 않은 괄호가 있습니다")
+
+
+def uncertainty_finding(reason, line, function=None):
+    finding = {
+        "malicious": False, "uncertain": True, "reason": reason,
+        "line": line, "risk_level": "MEDIUM", "risk_type": "NONE",
+    }
+    if function:
+        finding["function"] = function
+    return finding
+
+
+def detect_analysis_gaps(stripped, newline_offsets, out):
+    # import 해석 및 상속 결합은 이 분석기의 지원 범위 밖이다.
+    for pattern, reason in (
+        (r"\bimport\b", "import된 소스는 분석하지 않아 외부 의존 구현을 확인할 수 없습니다."),
+        (r"\bcontract\s+\w+\s+is\b", "상속된 상태변수·함수·권한을 결합해 분석하지 못하므로 전체 동작을 확정할 수 없습니다."),
+        (r"\bassembly\b", "인라인 어셈블리의 전체 효과를 분석하지 못해 안전성을 확정할 수 없습니다."),
+    ):
+        for match in re.finditer(pattern, stripped):
+            out.append(uncertainty_finding(reason, line_of(match.start(), newline_offsets)))
+
+
+def detect_uncertain_behavior(contract, func, owner_vars, newline_offsets, out):
+    """위험 확정 근거와 별개로, 외부 구현/운영 정보가 필요한 경로를 기록한다."""
+    # 일반 ETH 송금(call with empty data / transfer / send)은 기존 규칙이 분석한다.
+    # 그 밖의 저수준 호출과 외부 메서드는 대상 구현을 볼 수 없다.
+    for match in re.finditer(r"\.\s*(\w+)\s*(?:\{[^{}]*\}\s*)?\(", func.body):
+        method = match.group(1)
+        if re.search(r"\babi\s*$", func.body[:match.start()]):
+            continue  # abi.encode/decode 등은 외부 호출이 아니다.
+        if method in {"delegatecall", "transfer", "send", "push", "pop"}:
+            # 주소의 transfer/send와 구분되는 토큰 인터페이스 호출은 아래에서 처리.
+            if method != "transfer":
+                continue
+            end = find_matching_paren(func.body, match.end() - 1)
+            if len(split_top_params(func.body[match.end():end])) < 2:
+                continue
+        if method == "call":
+            end = find_matching_paren(func.body, match.end() - 1)
+            if not func.body[match.end():end].strip():
+                continue
+        # 파일 안에 구현된 라이브러리나 this 호출까지 안전하다고 가정하지 않는다.
+        out.append(uncertainty_finding(
+            "%s()의 외부 호출(%s)은 대상 구현과 반환 동작을 확인할 수 없어 추가 검토가 필요합니다." % (func.name, method),
+            find_line(contract, func.body_start_idx + match.start(), newline_offsets), func.name))
+
+    # 장부 없는 공개 수신 + 특권 송금은 지갑/회수 정책과 사용자 보관금을
+    # 코드만으로 구분할 수 없다. 수신 자체가 제한된 에스크로는 포함하지 않는다.
+    open_receive = any(f.name == "receive" and f.is_payable and not f.body.strip()
+                       for f in contract.functions)
+    value_transfer = re.search(r"\.call\s*\{[^{}]*\bvalue\s*:|\.(?:transfer|send)\s*\(", func.body)
+    if (open_receive and not find_custodial_mapping(contract) and value_transfer
+            and function_is_privileged(func, contract, owner_vars)[0]):
+        finding = uncertainty_finding(
+            "%s()는 누구나 ETH를 보낼 수 있는 계약에서 관리자 권한으로 자금을 이동합니다. 소유자 자금 회수인지 사용자 보관금 인출인지 귀속 정보를 확인할 수 없습니다." % func.name,
+            find_line(contract, func.body_start_idx + value_transfer.start(), newline_offsets), func.name)
+        finding["risk_type"] = "CENTRALIZATION"
+        out.append(finding)
+
+    # 사용자 예치금의 시간/중단 제약을 관리자가 사후 변경할 수 있는 경우.
+    custodial = find_custodial_mapping(contract)
+    if custodial:
+        for match in re.finditer(r"\b(?:require|if)\s*\(", func.body):
+            end = find_matching_paren(func.body, match.end() - 1)
+            condition = func.body[match.end():end]
+            timed = bool(re.search(r"\bblock\s*\.\s*(?:timestamp|number)\b", condition))
+            withdraws = bool(re.search(r"\b" + re.escape(custodial) + r"\s*\[[^\]]+\]\s*(?:-=|=(?!=))", func.body))
+            for typ, name, _ in contract.state_vars:
+                if not timed and not (typ == "bool" and withdraws):
+                    continue
+                if re.search(r"\b" + re.escape(name) + r"\b", condition):
+                    setter, _ = find_setter_privilege(contract, name, owner_vars)
+                    if setter:
+                        out.append(uncertainty_finding(
+                            "%s()의 출금 제약(%s)을 %s()에서 관리자가 변경할 수 있어 예치금 회수 가능성을 확정할 수 없습니다." % (func.name, name, setter.name),
+                            find_line(contract, func.body_start_idx + match.start(), newline_offsets), func.name))
+
+
 def analyze_file(path: str):
     try:
         with open(path, "r", encoding="utf-8", errors="replace") as f:
@@ -883,8 +1071,11 @@ def analyze_file(path: str):
 
     try:
         stripped = strip_comments_and_strings(src)
+        validate_delimiters(stripped)
         newline_offsets = [i for i, ch in enumerate(stripped) if ch == "\n"]
         contracts = parse_source(stripped)
+    except _AnalysisTimeout:
+        raise
     except Exception as e:
         return {
             "file": os.path.basename(path),
@@ -902,32 +1093,38 @@ def analyze_file(path: str):
         }
 
     all_findings = []
+    detect_analysis_gaps(stripped, newline_offsets, all_findings)
     for c in contracts:
         owner_vars = owner_like_state_vars(c)
         all_funcs = list(c.functions)
         if c.constructor:
             all_funcs = [c.constructor] + all_funcs
         for func in all_funcs:
-            try:
-                detect_uncapped_mint(c, func, owner_vars, newline_offsets, all_findings)
-                detect_transfer_asymmetry(c, func, owner_vars, newline_offsets, all_findings)
-                detect_delegatecall(c, func, owner_vars, newline_offsets, all_findings)
-                detect_fund_drain(c, func, owner_vars, newline_offsets, all_findings)
-                detect_allowance_bypass(c, func, owner_vars, newline_offsets, all_findings)
-                detect_reentrancy(c, func, owner_vars, newline_offsets, all_findings)
-                detect_owner_exemption(c, func, owner_vars, newline_offsets, all_findings)
-                detect_privileged_balance_mutation(c, func, owner_vars, newline_offsets, all_findings)
-                detect_fee_siphon(c, func, owner_vars, newline_offsets, all_findings)
-            except Exception:
-                # 개별 탐지 실패는 무시하고 계속 진행 (해당 파일 전체를 죽이지 않음)
-                continue
+            for detector in (
+                detect_uncapped_mint, detect_transfer_asymmetry, detect_delegatecall,
+                detect_fund_drain, detect_allowance_bypass, detect_reentrancy,
+                detect_owner_exemption, detect_privileged_balance_mutation,
+                detect_fee_siphon, detect_arbitrary_call_drain, detect_uncertain_behavior,
+            ):
+                try:
+                    detector(c, func, owner_vars, newline_offsets, all_findings)
+                except _AnalysisTimeout:
+                    raise
+                except Exception as e:
+                    all_findings.append(uncertainty_finding(
+                        "%s()의 %s 분석에 실패해 검사가 불완전합니다 (%s)." % (func.name, detector.__name__, type(e).__name__),
+                        find_line(c, func.header_start_idx, newline_offsets), func.name))
 
     malicious_findings = [x for x in all_findings if x["malicious"]]
-    benign_notes = [x for x in all_findings if not x["malicious"]]
+    uncertain_findings = [x for x in all_findings if x.get("uncertain")]
+    benign_notes = [x for x in all_findings if not x["malicious"] and not x.get("uncertain")]
 
     if malicious_findings:
         verdict = "MALICIOUS"
         chosen = malicious_findings
+    elif uncertain_findings:
+        verdict = "UNCERTAIN"
+        chosen = uncertain_findings
     elif benign_notes:
         verdict = "BENIGN"
         chosen = benign_notes
@@ -942,7 +1139,7 @@ def analyze_file(path: str):
         if fnd["reason"] not in seen_reason:
             reasons.append(fnd["reason"])
             seen_reason.add(fnd["reason"])
-        evidence.append({"function": fnd["function"], "line": fnd["line"]})
+        evidence.append({key: fnd[key] for key in ("function", "line") if key in fnd})
 
     if not reasons:
         reasons = ["소유자/특권 계정이 없거나, 발행·전송 제한·delegatecall·자금 인출 경로 중 위험 패턴이 발견되지 않았습니다."]
@@ -963,7 +1160,7 @@ def analyze_file(path: str):
         "reasons": reasons,
         "evidence": evidence,
         "risk_level": risk_level,
-        "risk_type": (risk_types[0] if verdict == "MALICIOUS" else ("CENTRALIZATION" if chosen else "NONE")),
+        "risk_type": (risk_types[0] if verdict in ("MALICIOUS", "UNCERTAIN") else ("CENTRALIZATION" if chosen else "NONE")),
     }
     return result
 
